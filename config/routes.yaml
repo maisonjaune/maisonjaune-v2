@@ -1,6 +1,3 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

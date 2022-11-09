@@ -13,7 +13,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        admin:
+        main:
             pattern: ^/
             user_checker: fos_user.user_checker
             logout: true
