@@ -7,7 +7,8 @@ security:
             id: fos_user.user_provider.username
 
     role_hierarchy:
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
 
     firewalls:
         dev:
@@ -16,8 +17,11 @@ security:
         main:
             pattern: ^/
             user_checker: fos_user.user_checker
-            logout: true
+            logout:
+                path: fos_user_security_logout
             form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
                 provider: fos_userbundle
                 enable_csrf: true
 
