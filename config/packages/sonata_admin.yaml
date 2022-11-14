@@ -1,8 +1,17 @@
 sonata_admin:
-    title: 'Sonata Admin'
+    title: 'LMJ'
+    search: false
+
+    options:
+        html5_validate: false
+
+    global_search:
+        empty_boxes: hide
+
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
+
     security:
         handler: sonata.admin.security.handler.role
         role_admin: ROLE_ADMIN
