@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -19,12 +20,15 @@ class UserFixtures extends Fixture
         foreach ($this->getData() as $data) {
             $entity = $this->userManager->createUser();
 
-            $entity
-                ->setUsername($data['username'])
-                ->setEmail($data['email'])
-                ->setPlainPassword('azerty')
-                ->setEnabled($data['enabled'])
-                ->setSuperAdmin($data['super_admin']);
+            if ($entity instanceof User) {
+                $entity
+                    ->setUsername($data['username'])
+                    ->setEmail($data['email'])
+                    ->setPlainPassword('azerty')
+                    ->setEnabled($data['enabled'])
+                    ->setAdmin($data['admin'])
+                    ->setSuperAdmin($data['super_admin']);
+            }
 
             $this->userManager->updateUser($entity);
         }
@@ -39,24 +43,28 @@ class UserFixtures extends Fixture
                 'username' => 'superadmin',
                 'email' => 'super.admin@mail.test',
                 'enabled' => true,
+                'admin' => true,
                 'super_admin' => true,
             ],
             [
                 'username' => 'admin',
                 'email' => 'admin@mail.test',
                 'enabled' => true,
+                'admin' => true,
                 'super_admin' => false,
             ],
             [
                 'username' => 'enabled.user',
                 'email' => 'enabled.user@mail.test',
                 'enabled' => true,
+                'admin' => false,
                 'super_admin' => false,
             ],
             [
                 'username' => 'disabled.user',
                 'email' => 'disabled.user@mail.test',
                 'enabled' => false,
+                'admin' => false,
                 'super_admin' => false,
             ],
         ];
