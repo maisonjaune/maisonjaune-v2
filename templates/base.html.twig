@@ -5,9 +5,13 @@
 {% endblock %}
 
 {% block body %}
+    {{ component('topbar') }}
+
     {% block header %}{% endblock %}
 
     {{ block('content') }}
+
+    {{ component('footer') }}
 {% endblock %}
 
 {% block javascripts %}
