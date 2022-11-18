@@ -12,6 +12,20 @@ sonata_admin:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
 
+        groups:
+            homepage:
+                label: Home
+                on_top: true
+                icon: '<i class="fa fa-dashboard"></i>'
+                items:
+                    - { label: Dashboard, route: sonata_admin_dashboard }
+            app.admin.group.contenu:
+                label: User List
+                on_top: true
+                icon: '<i class="fa fa-users"></i>'
+                items:
+                    - admin.user
+
     security:
         handler: sonata.admin.security.handler.role
         role_admin: ROLE_ADMIN

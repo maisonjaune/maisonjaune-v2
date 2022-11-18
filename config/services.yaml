@@ -3,6 +3,9 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+imports:
+    - { resource: admins.yaml }
+
 parameters:
     mailer_user_address: '%env(MAILER_USER_ADDRESS)%'
     mailer_user_name: '%env(MAILER_USER_NAME)%'
@@ -21,3 +24,4 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
