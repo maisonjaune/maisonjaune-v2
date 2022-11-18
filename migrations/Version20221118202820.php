@@ -14,7 +14,7 @@ final class Version20221118202820 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Création de la table `gallery`, `gallery_item` et `media`';
     }
 
     public function up(Schema $schema): void
