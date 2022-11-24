@@ -4,61 +4,47 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\FormBuilder\ParameterFormBuilder;
 use App\Storage\ParameterStorageInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 
 class ParameterAdminController extends CRUDController
 {
-    private $parameterStorage;
-
-    public function __construct(ParameterStorageInterface $parameterStorage)
+    public function __construct(
+        private ParameterStorageInterface $parameterStorage,
+        private ParameterFormBuilder      $formBuilder)
     {
-        $this->parameterStorage = $parameterStorage;
     }
 
     public function defaultAction(Request $request)
     {
-        $data = $this->parameterStorage->getByDomain('default');
-
-        $form = $this->createFormBuilder($data)
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->parameterStorage->save('default', $form->getData());
-
-            $this->addFlash('success', 'Successfully saved parameters');
-            return $this->redirectToRoute('admin_app_parameter_global');
-        }
-
-        return $this->renderWithExtraParams('admin/CRUD/parameter/index.html.twig', [
-            'title' => 'Default parameters',
-            'form' => $form->createView()
-        ]);
+        return $this->renderAction($request, 'default', 'Default parameters');
     }
 
     public function blogAction(Request $request)
     {
-        $data = $this->parameterStorage->getByDomain('blog');
+        return $this->renderAction($request, 'blog', 'Blog parameters');
+    }
 
-        $form = $this->createFormBuilder($data)
-            ->getForm();
+    private function renderAction(Request $request, string $domaine, string $title)
+    {
+        $data = $this->parameterStorage->getByDomain($domaine);
+
+        $form = $this->formBuilder->build($data);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->parameterStorage->save('blog', $form->getData());
+            $this->parameterStorage->save($domaine, $form->getData());
 
             $this->addFlash('success', 'Successfully saved parameters');
-            return $this->redirectToRoute('admin_app_parameter_blog');
+            return $this->redirectToRoute(sprintf('admin_app_parameter_%s', $domaine));
         }
 
         return $this->renderWithExtraParams('admin/CRUD/parameter/index.html.twig', [
-            'title' => 'Blog parameters',
+            'title' => $title,
             'form' => $form->createView()
         ]);
     }
