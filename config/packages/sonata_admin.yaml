@@ -25,6 +25,12 @@ sonata_admin:
                 icon: '<i class="fa fa-users"></i>'
                 items:
                     - admin.user
+            app.admin.group.parameters:
+                label: Parameters
+                icon: '<i class="fa fa-cogs"></i>'
+                items:
+                    - { label: Default Parameters, route: admin_app_parameter_default, roles: [ ROLE_ADMIN_PARAMETER_LIST ] }
+                    - { label: Blog Parameters, route: admin_app_parameter_blog, roles: [ ROLE_ADMIN_PARAMETER_LIST ] }
 
     security:
         handler: sonata.admin.security.handler.role
