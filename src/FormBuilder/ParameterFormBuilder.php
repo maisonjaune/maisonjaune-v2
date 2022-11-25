@@ -1,33 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\FormBuilder;
 
-use App\Entity\Parameter;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
-class ParameterFormBuilder
+class ParameterFormBuilder implements ParameterFormBuilderInterface
 {
     public function __construct(
-        private FormFactoryInterface $formBuilder,
+        private FormFactoryInterface       $formBuilder,
+        private OptionFormBuilderInterface $optionFormBuilder
     )
     {
     }
 
-    /**
-     * @param Parameter[] $parameters
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function build(array $parameters)
+    public function build(array $parameters): FormInterface
     {
         $formBuilder = $this->formBuilder->createBuilder();
 
         foreach ($parameters as $parameter) {
-            $parameterFormBuilder = $this->formBuilder->createNamedBuilder($parameter->getName(), TextType::class, $parameter->getValue(), [
-                'required' => false
-            ]);
-
-            $formBuilder->add($parameterFormBuilder);
+            $formBuilder->add($this->optionFormBuilder->build($parameter));
         }
 
         return $formBuilder->getForm();
