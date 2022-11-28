@@ -30,6 +30,11 @@ class Team
         return $this->name;
     }
 
+    public function getFullname(): ?string
+    {
+        return $this->getClub()->getName() . ' [' . $this->getName() . ']';
+    }
+
     public function setName(string $name): self
     {
         $this->name = $name;

@@ -23,7 +23,7 @@ class Parameter
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $service = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $value = null;
 
     public function getId(): ?int
@@ -72,7 +72,7 @@ class Parameter
         return $this->value;
     }
 
-    public function setValue(string $value): self
+    public function setValue(?string $value): self
     {
         $this->value = $value;
 

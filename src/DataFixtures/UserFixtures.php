@@ -30,6 +30,8 @@ class UserFixtures extends Fixture
                     ->setSuperAdmin($data['super_admin']);
             }
 
+            $this->setReference($data['username'], $entity);
+
             $this->userManager->updateUser($entity);
         }
 
