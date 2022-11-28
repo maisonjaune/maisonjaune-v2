@@ -20,6 +20,9 @@ class Parameter
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $service = null;
+
     #[ORM\Column(length: 255)]
     private ?string $value = null;
 
@@ -48,6 +51,18 @@ class Parameter
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getService(): ?string
+    {
+        return $this->service;
+    }
+
+    public function setService(?string $service): self
+    {
+        $this->service = $service;
 
         return $this;
     }
