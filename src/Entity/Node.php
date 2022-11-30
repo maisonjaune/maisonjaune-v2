@@ -51,6 +51,7 @@ abstract class Node
 
     public function __construct()
     {
+        $this->draft = true;
         $this->sticky = false;
         $this->commentable = true;
         $this->actif = false;

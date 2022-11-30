@@ -14,9 +14,24 @@ class TwoPostJumbotron
      */
     public TwoPostCombination $posts;
 
+    public function hasPosts(): bool
+    {
+        return $this->hasPrimary() || $this->hasSecondary();
+    }
+
+    public function hasPrimary(): bool
+    {
+        return $this->posts->hasPrimary();
+    }
+
     public function getPrimary(): ?Post
     {
         return $this->posts->getPrimary();
+    }
+
+    public function hasSecondary(): bool
+    {
+        return $this->posts->hasSecondary();
     }
 
     public function getSecondary(): ?Post
