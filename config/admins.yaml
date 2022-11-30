@@ -16,7 +16,7 @@ services:
             -
                 name: sonata.admin
                 model_class: App\Entity\Node\Post
-                controller: App\Controller\Node\PostAdminController
+                controller: App\Controller\Admin\Node\PostAdminController
                 manager_type: orm
                 group: admin
                 label: Post List
