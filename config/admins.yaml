@@ -10,6 +10,17 @@ services:
                 group: Users
                 label: User List
 
+    admin.node.post:
+        class: App\Admin\Node\PostAdmin
+        tags:
+            -
+                name: sonata.admin
+                model_class: App\Entity\Node\Post
+                controller: App\Controller\Node\PostAdminController
+                manager_type: orm
+                group: admin
+                label: Post List
+
     admin.parameters:
         class: App\Admin\ParameterAdmin
         tags:
