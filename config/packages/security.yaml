@@ -16,6 +16,12 @@ security:
             - ROLE_ADMIN_USER_CREATE
             - ROLE_ADMIN_USER_EDIT
             - ROLE_ADMIN_USER_DELETE
+            -
+            - ROLE_ADMIN_NODE_POST_LIST
+            - ROLE_ADMIN_NODE_POST_VIEW
+            - ROLE_ADMIN_NODE_POST_CREATE
+            - ROLE_ADMIN_NODE_POST_EDIT
+            - ROLE_ADMIN_NODE_POST_DELETE
 
             - ROLE_ADMIN_PARAMETER_LIST
 

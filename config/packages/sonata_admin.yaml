@@ -19,12 +19,17 @@ sonata_admin:
                 icon: '<i class="fa fa-dashboard"></i>'
                 items:
                     - { label: Dashboard, route: sonata_admin_dashboard }
-            app.admin.group.contenu:
+            app.admin.group.user:
                 label: User List
                 on_top: true
                 icon: '<i class="fa fa-users"></i>'
                 items:
                     - admin.user
+            app.admin.group.contenu:
+                label: Content
+                icon: '<i class="fa fa-briefcase"></i>'
+                items:
+                    - admin.node.post
             app.admin.group.parameters:
                 label: Parameters
                 icon: '<i class="fa fa-cogs"></i>'

@@ -1,0 +1,25 @@
+sonata_media:
+    default_context: post
+    contexts:
+        post:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                thumbnail:                  { width: 100, height: 100, quality: 70 }
+                post.default:               { width: 975, height: 730, quality: 100 }
+                post.jumbotron.primary:     { width: 1200, height: 500, quality: 100 }
+                post.jumbotron.secondary:   { width: 800, height: 500, quality: 100 }
+                post.jumbotron.mobile:      { width: 750, height: 400, quality: 100 }
+                post.card.primary:          { width: 538, height: 300, quality: 100 }
+                post.card.secondary:        { width: 538, height: 300, quality: 100 }
+                post.show:                  { width: 728, height: 406, quality: 100 }
+                post.opengraph:             { width: 812, height: 460, quality: 70 }
+    cdn:
+        server:
+            path: /upload/media
+
+    filesystem:
+        local:
+            # Directory for uploads should be writable
+            directory: "%kernel.project_dir%/public/upload/media"
+            create: false

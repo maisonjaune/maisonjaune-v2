@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\NodeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NodeRepository::class)]
 #[ORM\InheritanceType("JOINED")]
@@ -17,31 +19,42 @@ abstract class Node
     protected ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['Default'])]
     protected ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(groups: ['Default'])]
     protected ?string $slug = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank(groups: ['Content'])]
     protected ?string $content = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank(groups: ['Publication'])]
     protected ?\DateTimeImmutable $publishedAt = null;
 
     #[ORM\Column]
-    protected ?bool $isActif = false;
+    protected ?bool $actif = false;
 
     #[ORM\Column]
-    protected ?bool $isDraft = false;
+    protected ?bool $draft = false;
 
     #[ORM\Column]
-    protected ?bool $isSticky = false;
+    protected ?bool $sticky = false;
 
     #[ORM\Column]
-    protected ?bool $isCommentable = true;
+    protected ?bool $commentable = true;
 
     #[ORM\ManyToOne]
     protected ?User $author = null;
+
+    public function __construct()
+    {
+        $this->sticky = false;
+        $this->commentable = true;
+        $this->actif = false;
+    }
 
     public function getId(): ?int
     {
@@ -98,48 +111,48 @@ abstract class Node
 
     public function isActif(): ?bool
     {
-        return $this->isActif;
+        return $this->actif;
     }
 
-    public function setIsActif(bool $isActif): self
+    public function setActif(bool $actif): self
     {
-        $this->isActif = $isActif;
+        $this->actif = $actif;
 
         return $this;
     }
 
     public function isDraft(): ?bool
     {
-        return $this->isDraft;
+        return $this->draft;
     }
 
-    public function setIsDraft(bool $isDraft): self
+    public function setDraft(bool $draft): self
     {
-        $this->isDraft = $isDraft;
+        $this->draft = $draft;
 
         return $this;
     }
 
     public function isSticky(): ?bool
     {
-        return $this->isSticky;
+        return $this->sticky;
     }
 
-    public function setIsSticky(bool $isSticky): self
+    public function setIsSticky(bool $sticky): self
     {
-        $this->isSticky = $isSticky;
+        $this->sticky = $sticky;
 
         return $this;
     }
 
     public function isCommentable(): ?bool
     {
-        return $this->isCommentable;
+        return $this->commentable;
     }
 
-    public function setIsCommentable(bool $isCommentable): self
+    public function setIsCommentable(bool $commentable): self
     {
-        $this->isCommentable = $isCommentable;
+        $this->commentable = $commentable;
 
         return $this;
     }
