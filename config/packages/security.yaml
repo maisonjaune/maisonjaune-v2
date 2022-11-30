@@ -17,6 +17,8 @@ security:
             - ROLE_ADMIN_USER_EDIT
             - ROLE_ADMIN_USER_DELETE
 
+            - ROLE_ADMIN_PARAMETER_LIST
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

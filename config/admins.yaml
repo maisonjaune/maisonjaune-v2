@@ -2,4 +2,21 @@ services:
     admin.user:
         class: App\Admin\UserAdmin
         tags:
-            - { name: sonata.admin, model_class: App\Entity\User, controller: ~, manager_type: orm, group: Users, label: User List }
+            -
+                name: sonata.admin
+                model_class: App\Entity\User
+                controller: ~
+                manager_type: orm
+                group: Users
+                label: User List
+
+    admin.parameters:
+        class: App\Admin\ParameterAdmin
+        tags:
+            -
+                name: sonata.admin
+                model_class: App\Entity\Parameter
+                controller: App\Controller\Admin\ParameterAdminController
+                manager_type: orm
+                group: Parameters
+                label: Parameter List
