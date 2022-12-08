@@ -7,6 +7,7 @@ namespace App\Controller\Admin\Node;
 use App\Entity\Node\Post;
 use App\Enum\Node\FormPostType;
 use App\Form\Node\PostType;
+use App\Workflow\Place\PostTransition;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
@@ -59,6 +60,24 @@ final class PostAdminController extends CRUDController
         return $this->renderWithExtraParams('@SonataAdmin/CRUD/node/post/create.html.twig', [
             'action' => 'create',
             'form' => $formView,
+            'object' => $post,
+            'objectId' => null,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Post $post
+     * @return Response|null
+     */
+    protected function preEdit(Request $request, object $post): ?Response
+    {
+        if (!$this->postWorkflow->can($post, PostTransition::WRITE->value)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->renderWithExtraParams('@SonataAdmin/CRUD/node/post/edit.html.twig', [
+            'action' => 'edit',
             'object' => $post,
             'objectId' => null,
         ]);
