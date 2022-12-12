@@ -56,6 +56,27 @@ class UserFixtures extends Fixture
                 'super_admin' => false,
             ],
             [
+                'username' => 'redacteur01',
+                'email' => 'redacteur01@mail.test',
+                'enabled' => true,
+                'admin' => true,
+                'super_admin' => false,
+            ],
+            [
+                'username' => 'redacteur02',
+                'email' => 'redacteur02@mail.test',
+                'enabled' => true,
+                'admin' => true,
+                'super_admin' => false,
+            ],
+            [
+                'username' => 'redacteur03',
+                'email' => 'redacteur03@mail.test',
+                'enabled' => true,
+                'admin' => true,
+                'super_admin' => false,
+            ],
+            [
                 'username' => 'enabled.user',
                 'email' => 'enabled.user@mail.test',
                 'enabled' => true,
