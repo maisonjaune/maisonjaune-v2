@@ -29,8 +29,8 @@
 {% endblock %}
 
 {% block content %}
-    {% if mainPosts is defined %}
-        {# TODO : component('two-post-jumbotron', { posts: mainPosts }) #}
+    {% if postCombination is defined %}
+        {{ component('two-post-jumbotron', { posts: postCombination }) }}
     {% endif %}
 
     <div class="container">

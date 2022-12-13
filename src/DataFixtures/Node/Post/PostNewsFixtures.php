@@ -13,16 +13,14 @@ use Sonata\MediaBundle\Provider\ImageProvider;
 use Sonata\MediaBundle\Provider\ImageProviderInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use DateTimeImmutable;
 
 class PostNewsFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
-        #[Autowire('%kernel.project_dir%')]
-        private string                 $projectDir,
-        #[Autowire(service: 'sonata.media.manager.media')]
-        private MediaManagerInterface  $mediaManager,
-        #[Autowire(service: 'sonata.media.provider.image')]
-        private ImageProviderInterface $imageProvider,
+        #[Autowire(service: 'sonata.media.manager.media')] private MediaManagerInterface   $mediaManager,
+        #[Autowire(service: 'sonata.media.provider.image')] private ImageProviderInterface $imageProvider,
+        #[Autowire('%kernel.project_dir%')] private string                                 $projectDir,
     )
     {
     }
@@ -35,11 +33,12 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
             $entity
                 ->setTitle($data['title'])
                 ->setSlug($data['slug'])
-                ->setExcerpt($data['excerpt'])
+                ->setExcerpt($data['excerpt'] ?? null)
                 ->setContent($data['content'])
                 ->setActif($data['actif'])
                 ->setSticky($data['sticky'])
                 ->setCommentable($data['commentable'])
+                ->setPublishedAt($data['publishedAt'] ?? null)
                 ->setAuthor($this->getReference($data['author']));
 
             if (array_key_exists('image', $data)) {
@@ -76,6 +75,7 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-09-02'),
                 'image' => [
                     'name' => 'article-news-01.jpg',
                     'path' => '/assets/fixtures/media-01.jpg',
@@ -90,6 +90,7 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-09-21'),
                 'image' => [
                     'name' => 'article-news-02.jpg',
                     'path' => '/assets/fixtures/media-02.jpg',
@@ -104,6 +105,7 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-10-07'),
                 'image' => [
                     'name' => 'article-news-03.jpg',
                     'path' => '/assets/fixtures/media-03.jpg',
@@ -118,6 +120,7 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-10-29'),
                 'image' => [
                     'name' => 'article-news-04.jpg',
                     'path' => '/assets/fixtures/media-04.jpg',
@@ -132,6 +135,7 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-11-12'),
                 'image' => [
                     'name' => 'article-news-05.jpg',
                     'path' => '/assets/fixtures/media-05.jpg',

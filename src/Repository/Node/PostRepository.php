@@ -29,7 +29,7 @@ class PostRepository extends NodeRepository
     public function findLastSticky(?Criteria $criteria = null): array
     {
         $query = $this->getQueryEntityPublish('p')
-            ->andWhere('p.isSticky = 1')
+            ->andWhere('p.sticky = 1')
             ->orderBy('p.publishedAt', 'DESC')
             ->setMaxResults(2);
 
