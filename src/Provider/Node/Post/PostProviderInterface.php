@@ -10,4 +10,9 @@ interface PostProviderInterface
      * @return Post[]
      */
     public function findLastSticky(): array;
+
+    /**
+     * @return Post[]
+     */
+    public function findMain(): array;
 }

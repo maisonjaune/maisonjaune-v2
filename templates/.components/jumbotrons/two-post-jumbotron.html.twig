@@ -1,19 +1,16 @@
-{# TODO Ajouter les liens vers les articles #}
 <div class="jumbotron home-jumbotron">
     <div class="d-flex flex-column flex-md-row">
-        <a href="#" class="post">
+        <a href="{{ path('app_node_post', { slug: this.getPrimary.slug }) }}" class="post">
             {{ sonata_media(this.getPrimary.image, 'jumbotron_primary', {
                 class: 'img-fluid',
                 picture: {
                     '(max-width: 767px)': 'jumbotron_mobile',
                 },
             }) }}
-
             <div class="shadow">
                 <div class="container">
                     <div class="category">
-                        {# TODO Affichage de la catégorie de l'article #}
-                        CATEGORY
+                         {{ this.getPrimary.categories | map(c => c.name) | join(' / ') }}
                     </div>
                     <div class="title">
                         {{ this.getPrimary.title }}
@@ -21,7 +18,7 @@
                 </div>
             </div>
         </a>
-        <a href="#" class="post">
+        <a href="{{ path('app_node_post', { slug: this.getSecondary.slug }) }}" class="post">
             {{ sonata_media(this.getSecondary.image, 'jumbotron_secondary', {
                 class: 'img-fluid',
                 picture: {
@@ -31,8 +28,7 @@
             <div class="shadow">
                 <div class="container">
                     <div class="category">
-                        {# TODO Affichage de la catégorie de l'article #}
-                        CATEGORY
+                        {{ this.getSecondary.categories | map(c => c.name) | join(' / ') }}
                     </div>
                     <div class="title">
                         {{ this.getSecondary.title }}

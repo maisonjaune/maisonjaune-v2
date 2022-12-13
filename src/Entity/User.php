@@ -15,8 +15,41 @@ class User extends BaseUser
     #[ORM\Column(type: 'integer')]
     protected $id = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $lastname = null;
+
     #[ORM\Column]
     private ?bool $admin = null;
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFullname(): string
+    {
+        return implode(' ', array_filter([
+            $this->getFirstname(),
+            $this->getLastname()
+        ]));
+    }
 
     public function isAdmin(): ?bool
     {
@@ -39,5 +72,10 @@ class User extends BaseUser
         }
 
         return $roles;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
     }
 }

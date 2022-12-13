@@ -12,6 +12,7 @@ class Brief extends Node
 {
     public function __construct()
     {
+        parent::__construct();
         $this->isCommentable = false;
     }
 }

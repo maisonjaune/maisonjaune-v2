@@ -1,0 +1,10 @@
+{% for post in posts %}
+    <div class="mb-3">
+        <a href="{{ path('app_node_post', { slug: post.slug }) }}">
+            {{ component('card-post', {
+                post: post,
+                mediaFormat: 'card_sidebar'
+            }) }}
+        </a>
+    </div>
+{% endfor %}

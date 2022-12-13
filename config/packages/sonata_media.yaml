@@ -15,8 +15,10 @@ sonata_media:
                 jumbotron_primary:      { width: 1200, height: 500, quality: 100 }
                 jumbotron_secondary:    { width: 800,  height: 500, quality: 100 }
                 jumbotron_mobile:       { width: 750,  height: 400, quality: 100 }
-                card.primary:           { width: 538,  height: 300, quality: 100 }
-                card.secondary:         { width: 538,  height: 300, quality: 100 }
+                card_primary:           { width: 538,  height: 300, quality: 100 }
+                card_secondary:         { width: 538,  height: 300, quality: 100 }
+                card_sidebar:           { width: 348,  height: 195, quality: 100 }
+                card_mobile:            { width: 500,  height: 300, quality: 100 }
                 show:                   { width: 728,  height: 406, quality: 100 }
                 opengraph:              { width: 812,  height: 460, quality: 70 }
 

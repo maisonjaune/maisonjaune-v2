@@ -3,7 +3,7 @@
 namespace App\DataFixtures\Node\Post;
 
 use App\DataFixtures\UserFixtures;
-use App\Entity\Media\Media;
+use App\DataFixtures\Node\CategoryFixtures;
 use App\Entity\Node\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -39,6 +39,7 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 ->setSticky($data['sticky'])
                 ->setCommentable($data['commentable'])
                 ->setPublishedAt($data['publishedAt'] ?? null)
+                ->addCategory($this->getReference('News'))
                 ->setAuthor($this->getReference($data['author']));
 
             if (array_key_exists('image', $data)) {
@@ -147,7 +148,8 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            UserFixtures::class
+            UserFixtures::class,
+            CategoryFixtures::class,
         ];
     }
 }

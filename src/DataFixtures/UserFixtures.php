@@ -24,6 +24,8 @@ class UserFixtures extends Fixture
                 $entity
                     ->setUsername($data['username'])
                     ->setEmail($data['email'])
+                    ->setFirstname($data['firstname'])
+                    ->setLastname($data['lastname'])
                     ->setPlainPassword('azerty')
                     ->setEnabled($data['enabled'])
                     ->setAdmin($data['admin'])
@@ -44,6 +46,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'superadmin',
                 'email' => 'super.admin@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Super Admin',
                 'enabled' => true,
                 'admin' => true,
                 'super_admin' => true,
@@ -51,6 +55,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'admin',
                 'email' => 'admin@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Admin',
                 'enabled' => true,
                 'admin' => true,
                 'super_admin' => false,
@@ -58,6 +64,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'redacteur01',
                 'email' => 'redacteur01@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Rédacteur 01',
                 'enabled' => true,
                 'admin' => true,
                 'super_admin' => false,
@@ -65,6 +73,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'redacteur02',
                 'email' => 'redacteur02@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Rédacteur 02',
                 'enabled' => true,
                 'admin' => true,
                 'super_admin' => false,
@@ -72,6 +82,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'redacteur03',
                 'email' => 'redacteur03@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Rédacteur 03',
                 'enabled' => true,
                 'admin' => true,
                 'super_admin' => false,
@@ -79,6 +91,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'enabled.user',
                 'email' => 'enabled.user@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Enabled',
                 'enabled' => true,
                 'admin' => false,
                 'super_admin' => false,
@@ -86,6 +100,8 @@ class UserFixtures extends Fixture
             [
                 'username' => 'disabled.user',
                 'email' => 'disabled.user@mail.test',
+                'firstname' => 'Utilisateur',
+                'lastname' => 'Disabled',
                 'enabled' => false,
                 'admin' => false,
                 'super_admin' => false,

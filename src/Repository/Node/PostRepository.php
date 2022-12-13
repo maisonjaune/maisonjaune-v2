@@ -26,11 +26,30 @@ class PostRepository extends NodeRepository
      * @return Post[]
      * @throws QueryException
      */
+    public function findMain(Criteria $criteria = null): array
+    {
+        $query = $this->getQueryEntityPublish('p')
+            ->andWhere('p.sticky = 1')
+            ->orderBy('p.publishedAt', Criteria::DESC)
+            ->setMaxResults(2);
+
+        if (null !== $criteria) {
+            $query->addCriteria($criteria);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param Criteria|null $criteria
+     * @return Post[]
+     * @throws QueryException
+     */
     public function findLastSticky(?Criteria $criteria = null): array
     {
         $query = $this->getQueryEntityPublish('p')
             ->andWhere('p.sticky = 1')
-            ->orderBy('p.publishedAt', 'DESC')
+            ->orderBy('p.publishedAt', Criteria::DESC)
             ->setMaxResults(2);
 
         if (null !== $criteria) {
