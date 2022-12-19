@@ -23,7 +23,7 @@ class NodeRepository extends ServiceEntityRepository
         parent::__construct($registry, $this->getNodeClass());
     }
 
-    public function persist(Node $entity, bool $flush = false): void
+    public function add(Node $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

@@ -1,0 +1,73 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}{{ brief.title }}{% endblock %}
+
+{% block share_meta %}
+    <meta property="og:url" content="{{ url('app_node_brief', {slug: brief.slug}) | url_encode }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ brief.title }}" />
+    <meta property="og:description" content="{{ brief.title }}" />
+{% endblock %}
+
+{% block ld_json %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org/",
+            "@type": "Article",
+            "name": "{{ brief.title }}",
+            "headline": "{{ brief.title }}",
+            "description": "{{ brief.title }}",
+            "datePublished": "{{ brief.publishedAt | date('Y-m-d') }}",
+            "dateModified": "{{ brief.publishedAt | date('Y-m-d') }}",
+            "author" : {
+                "@type": "Person",
+                "name": "{{ brief.author.fullname }}"
+            },
+            "publisher" : {
+                "@type": "Person",
+                "name": "{{ brief.author.fullname }}"
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content_primary %}
+
+    {{ component('flash') }}
+
+    <div class="mb-3">
+        {% embed '@component/card.html.twig' with { brief: brief } only %}
+            {% set card_classes = ['card-brief-full'] %}
+            {% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
+
+            {% block card_content %}
+                <div class="card-body">
+                    <div class="categories">{{ brief.categories | map(c => c.name) | join(' / ') }}</div>
+                    <h5 class="lead">{{ brief.title }}</h5>
+                    <div class="text-muted">{{ brief.author.fullname }} | {{ brief.publishedAt | date('d/m/Y') }}</div>
+                    <hr />
+                    <div>
+                        {{ brief.content | raw }}
+                    </div>
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+
+    {% if brief.commentable %}
+        <div class="mb-3">
+            {# TODO : component('comment.form.block') #}
+        </div>
+
+        <div class="mb-3">
+            {# TODO : component('comment.list.block') #}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content_secondary %}
+    <div class="mb-3">
+        {{ component('card-brief_list') }}
+    </div>
+    {{ component('last_posts.block') }}
+{% endblock %}

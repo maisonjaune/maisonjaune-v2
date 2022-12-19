@@ -29,6 +29,9 @@ final class Version20221214124149 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_8C040D924E7AF8F ON gallery_item (gallery_id)');
         $this->addSql('CREATE INDEX IDX_8C040D92EA9FDD75 ON gallery_item (media_id)');
         $this->addSql('ALTER TABLE user ADD lastname VARCHAR(100) DEFAULT NULL AFTER email_canonical, ADD firstname VARCHAR(100) DEFAULT NULL AFTER email_canonical');
+        $this->addSql('CREATE TABLE brief_category (brief_id INT NOT NULL, category_id INT NOT NULL, INDEX IDX_E0A4AB57757FABFF (brief_id), INDEX IDX_E0A4AB5712469DE2 (category_id), PRIMARY KEY(brief_id, category_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE brief_category ADD CONSTRAINT FK_E0A4AB57757FABFF FOREIGN KEY (brief_id) REFERENCES node_brief (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE brief_category ADD CONSTRAINT FK_E0A4AB5712469DE2 FOREIGN KEY (category_id) REFERENCES node_category (id) ON DELETE CASCADE');
     }
 
     public function down(Schema $schema): void
@@ -43,5 +46,8 @@ final class Version20221214124149 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_8C040D92EA9FDD75 ON gallery_item');
         $this->addSql('ALTER TABLE gallery_item DROP gallery_id, DROP media_id');
         $this->addSql('ALTER TABLE user DROP firstname, DROP lastname');
+        $this->addSql('ALTER TABLE brief_category DROP FOREIGN KEY FK_E0A4AB57757FABFF');
+        $this->addSql('ALTER TABLE brief_category DROP FOREIGN KEY FK_E0A4AB5712469DE2');
+        $this->addSql('DROP TABLE brief_category');
     }
 }
