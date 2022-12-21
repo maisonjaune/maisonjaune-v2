@@ -6,6 +6,7 @@ use App\Repository\Football\TeamRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
+#[ORM\Table(name: "football_team")]
 class Team
 {
     #[ORM\Id]
