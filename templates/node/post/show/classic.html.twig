@@ -1,0 +1,64 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block share_meta %}
+    {# TODO : insertion des balise meta "OpenGraph" #}
+    {# TODO : insertion des balise meta "twitter" #}
+{% endblock %}
+
+{% block ld_json %}
+    {# TODO : insertion du script "application/ld+json" #}
+{% endblock %}
+
+{% block content_primary %}
+
+    {{ component('flash') }}
+
+    <div class="mb-3">
+        {% embed "@component/card.html.twig" with { post: post } only %}
+            {% set card_classes = ['card-post-full'] %}
+            {% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
+
+            {% block card_content %}
+                {{ sonata_media(post.image, 'show', {
+                    class: 'card-img-top',
+                    alt: post.title
+                }) }}
+                <div class="card-body">
+                    <div class="categories">
+                        {{ post.categories | map(c => c.name) | join(' / ') }}
+                    </div>
+                    <h5 class="lead">{{ post.title }}</h5>
+                    <div class="text-muted">
+                        {{ post.author.fullname }} | {{ post.publishedAt | date('d/m/Y') }}
+                    </div>
+                    <hr />
+                    <div class="font-weight-bold mb-3">
+                        {{ post.excerpt }}
+                    </div>
+                    <div class="post-content classic">
+                        {{ post.content | raw }}
+                    </div>
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+
+    {% if post.commentable %}
+        <div class="mb-3">
+            {# TODO : component('comment.form.block') #}
+        </div>
+
+        <div class="mb-3">
+            {# TODO : component('comment.list.block') #}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content_secondary %}
+    <div class="mb-3">
+        {{ component('card-brief_list') }}
+    </div>
+    {{ component('last_posts.block') }}
+{% endblock %}

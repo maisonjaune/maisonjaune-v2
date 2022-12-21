@@ -23,7 +23,7 @@ class NodeRepository extends ServiceEntityRepository
         parent::__construct($registry, $this->getNodeClass());
     }
 
-    public function persist(Node $entity, bool $flush = false): void
+    public function add(Node $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -44,8 +44,8 @@ class NodeRepository extends ServiceEntityRepository
     public function getQueryEntityPublish($alias): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
-            ->where("{$alias}.isActif = 1")
-            ->andWhere("{$alias}.isDraft = 0")
+            ->where("{$alias}.actif = 1")
+            ->andWhere("{$alias}.draft = 0")
             ->andWhere("{$alias}.publishedAt < :today")
             ->setParameter('today', new DateTime());
     }

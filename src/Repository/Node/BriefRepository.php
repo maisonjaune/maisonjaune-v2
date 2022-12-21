@@ -3,8 +3,9 @@
 namespace App\Repository\Node;
 
 use App\Entity\Node\Brief;
+use App\Entity\Node\Category;
+use App\Repository\NodeRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Brief>
@@ -14,53 +15,31 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Brief[]    findAll()
  * @method Brief[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BriefRepository extends ServiceEntityRepository
+class BriefRepository extends NodeRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function findLast(): array
     {
-        parent::__construct($registry, Brief::class);
+        $query = $this->getQueryEntityPublish('b')
+            ->orderBy('b.publishedAt', 'DESC')
+            ->setMaxResults(4);
+
+        return $query->getQuery()->getResult();
     }
 
-    public function add(Brief $entity, bool $flush = false): void
+    public function findLastByCategory(Category $category): array
     {
-        $this->getEntityManager()->persist($entity);
+        $query = $this->getQueryEntityPublish('b')
+            ->join('b.categories', 'c')
+            ->andWhere('c IN (:categories)')
+            ->setParameter('categories', [$category->getId()])
+            ->orderBy('b.publishedAt', 'DESC')
+            ->setMaxResults(10);
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $query->getQuery()->getResult();
     }
 
-    public function remove(Brief $entity, bool $flush = false): void
+    protected function getNodeClass(): string
     {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return Brief::class;
     }
-
-//    /**
-//     * @return Brief[] Returns an array of Brief objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Brief
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

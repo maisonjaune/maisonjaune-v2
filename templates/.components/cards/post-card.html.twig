@@ -1,0 +1,30 @@
+{% extends "@component/card.html.twig" %}
+
+{% set card_classes = ['card-post'] | merge(card_classes is defined ? [card_classes] : []) %}
+{% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
+
+{% block card_content %}
+    {{ sonata_media(post.image, mediaFormat, {
+        class: 'card-img-top',
+        alt: post.title,
+        picture: {
+            '(max-width: 767px)': 'card_mobile',
+        },
+    }) }}
+
+    <div class="card-body">
+        <h5 class="lead">{{ post.title }}</h5>
+        <div class="card-text categories">
+            {{ post.categories | map(c => c.name) | join(' / ') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block card_footer %}
+    <small class="text-muted">
+        {{ post.publishedAt | date('d/m') }}
+    </small>
+    <small class="text-muted">
+        {{ post.author.fullname }}
+    </small>
+{% endblock %}

@@ -29,17 +29,23 @@
 {% endblock %}
 
 {% block content %}
-    {% if mainPosts is defined %}
-        {# TODO : component('two-post-jumbotron', { posts: mainPosts }) #}
+    {% if postCombination is defined %}
+        {{ component('two-post-jumbotron', { posts: postCombination }) }}
     {% endif %}
 
     <div class="container">
         {{ component('flash') }}
         <div class="my-3">
-            <div class="card-deck flex-column flex-lg-row">
-                {# TODO : component('card-poll') #}
-                {# TODO : component('card-matchs') #}
-                {# TODO : component('card-brief_list') #}
+            <div class="row">
+                <div class="col">
+                    {# TODO : component('card-poll') #}
+                </div>
+                <div class="col">
+                    {# TODO : component('card-matchs') #}
+                </div>
+                <div class="col">
+                    {{ component('card-brief_list') }}
+                </div>
             </div>
         </div>
         <div class="mb-3">

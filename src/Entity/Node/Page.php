@@ -12,6 +12,7 @@ class Page extends Node
 {
     public function __construct()
     {
-        $this->isCommentable = false;
+        parent::__construct();
+        $this->commentable = false;
     }
 }

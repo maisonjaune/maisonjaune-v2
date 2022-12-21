@@ -1,0 +1,40 @@
+<div class="jumbotron home-jumbotron">
+    <div class="d-flex flex-column flex-md-row">
+        <a href="{{ path('app_node_post', { slug: this.getPrimary.slug }) }}" class="post">
+            {{ sonata_media(this.getPrimary.image, 'jumbotron_primary', {
+                class: 'img-fluid',
+                picture: {
+                    '(max-width: 767px)': 'jumbotron_mobile',
+                },
+            }) }}
+            <div class="shadow">
+                <div class="container">
+                    <div class="category">
+                         {{ this.getPrimary.categories | map(c => c.name) | join(' / ') }}
+                    </div>
+                    <div class="title">
+                        {{ this.getPrimary.title }}
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="{{ path('app_node_post', { slug: this.getSecondary.slug }) }}" class="post">
+            {{ sonata_media(this.getSecondary.image, 'jumbotron_secondary', {
+                class: 'img-fluid',
+                picture: {
+                    '(max-width: 767px)': 'jumbotron_mobile',
+                },
+            }) }}
+            <div class="shadow">
+                <div class="container">
+                    <div class="category">
+                        {{ this.getSecondary.categories | map(c => c.name) | join(' / ') }}
+                    </div>
+                    <div class="title">
+                        {{ this.getSecondary.title }}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

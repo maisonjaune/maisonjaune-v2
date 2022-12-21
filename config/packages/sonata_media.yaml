@@ -1,25 +1,40 @@
 sonata_media:
+    db_driver: doctrine_orm
+    class:
+        media: App\Entity\Media\Media
+        gallery: App\Entity\Media\Gallery
+        gallery_item: App\Entity\Media\GalleryItem
     default_context: post
     contexts:
         post:
             providers:
                 - sonata.media.provider.image
             formats:
-                thumbnail:                  { width: 100, height: 100, quality: 70 }
-                post.default:               { width: 975, height: 730, quality: 100 }
-                post.jumbotron.primary:     { width: 1200, height: 500, quality: 100 }
-                post.jumbotron.secondary:   { width: 800, height: 500, quality: 100 }
-                post.jumbotron.mobile:      { width: 750, height: 400, quality: 100 }
-                post.card.primary:          { width: 538, height: 300, quality: 100 }
-                post.card.secondary:        { width: 538, height: 300, quality: 100 }
-                post.show:                  { width: 728, height: 406, quality: 100 }
-                post.opengraph:             { width: 812, height: 460, quality: 70 }
+                thumbnail:              { width: 100,  height: 100, quality: 70 }
+                default:                { width: 975,  height: 730, quality: 100 }
+                jumbotron_primary:      { width: 1200, height: 500, quality: 100 }
+                jumbotron_secondary:    { width: 800,  height: 500, quality: 100 }
+                jumbotron_mobile:       { width: 750,  height: 400, quality: 100 }
+                card_primary:           { width: 538,  height: 300, quality: 100 }
+                card_secondary:         { width: 538,  height: 300, quality: 100 }
+                card_sidebar:           { width: 348,  height: 195, quality: 100 }
+                card_mobile:            { width: 500,  height: 300, quality: 100 }
+                show:                   { width: 728,  height: 406, quality: 100 }
+                opengraph:              { width: 812,  height: 460, quality: 70 }
+
     cdn:
         server:
-            path: /upload/media
+            path: /media
 
     filesystem:
         local:
             # Directory for uploads should be writable
-            directory: "%kernel.project_dir%/public/upload/media"
+            directory: "%kernel.project_dir%/public/media"
             create: false
+
+    admin_format:
+        width: 200
+        height: 200
+
+    resizers:
+        default: sonata.media.resizer.crop

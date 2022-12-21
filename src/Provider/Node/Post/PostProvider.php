@@ -30,7 +30,22 @@ class PostProvider implements PostProviderInterface
         return $posts;
     }
 
-    public function addPostToRegistrer($posts)
+    /**
+     * @return Post[]
+     * @throws QueryException
+     */
+    public function findMain(): array
+    {
+        $posts = $this->postRepository->findMain($this->getCriteria());
+        $this->addPostToRegistrer($posts);
+        return $posts;
+    }
+
+    /**
+     * @param Post|Post[] $posts
+     * @return void
+     */
+    public function addPostToRegistrer(mixed $posts): void
     {
         if (null === $posts) {
             return;

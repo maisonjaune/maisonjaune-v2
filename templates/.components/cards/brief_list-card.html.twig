@@ -1,0 +1,29 @@
+{% extends "@component/card.html.twig" %}
+
+{% set card_classes = ['card-briefs'] %}
+
+{% block card_header %}
+    {% trans %}Additional time{% endtrans %}
+{% endblock %}
+
+{% block card_body %}
+    <div class="h-100 d-flex flex-column">
+        {% for brief in this.briefs %}
+            <a href="{{ path('app_node_brief', { slug: brief.slug }) }}" class="card-row flex-grow-1 d-flex flex-row align-items-center text-body">
+                <small class="date text-muted mr-1 text-nowrap">
+                    {% if brief.publishedAt | date('Ymd') == "now" | date('Ymd') %}
+                        {{ brief.publishedAt | date('H:i') }}
+                    {% else %}
+                        {{ brief.publishedAt | date('d/m') }}
+                    {% endif %}
+                </small>
+                <div class="category badge badge-secondary text-primary mx-1 text-uppercase">
+                    {{ brief.categories.first.shortname }}
+                </div>
+                <div class="title text-nowrap text-truncate">
+                    {{ brief.title }}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

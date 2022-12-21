@@ -138,7 +138,7 @@ abstract class Node
         return $this->sticky;
     }
 
-    public function setIsSticky(bool $sticky): self
+    public function setSticky(bool $sticky): self
     {
         $this->sticky = $sticky;
 
@@ -150,7 +150,7 @@ abstract class Node
         return $this->commentable;
     }
 
-    public function setIsCommentable(bool $commentable): self
+    public function setCommentable(bool $commentable): self
     {
         $this->commentable = $commentable;
 
