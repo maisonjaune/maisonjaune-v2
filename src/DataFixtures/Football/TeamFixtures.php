@@ -35,79 +35,79 @@ class TeamFixtures extends Fixture
                 'club' => 'Amiens SC',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Angers',
+                'club' => 'Angers SCO',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Bordeaux',
+                'club' => 'FC Girondins de Bordeaux',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Brest',
+                'club' => 'Stade Brestois 29',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Caen',
+                'club' => 'Stade Malherbe Caen',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Clermont',
+                'club' => 'Clermont Foot',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Dijon',
+                'club' => 'Dijon FCO',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Guingamp',
+                'club' => 'En Avant Guingamp',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Lens',
+                'club' => 'RC Lens',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Lorient',
+                'club' => 'FC Lorient',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'LOSC',
+                'club' => 'LOSC Lille',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Lyon',
+                'club' => 'Olympique Lyonnais',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Metz',
+                'club' => 'Olympique de Marseille',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Monaco',
+                'club' => 'FC Metz',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Montpellier',
+                'club' => 'AS Monaco',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Nantes',
+                'club' => 'Montpellier HSC',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Nice',
+                'club' => 'FC Nantes',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Nîmes',
+                'club' => 'OGC Nice',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'OM',
+                'club' => 'Nîmes Olympique',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'PSG',
+                'club' => 'Paris Saint-Germain',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Rennes',
+                'club' => 'Stade Rennais FC',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'St-Étienne',
+                'club' => 'AS Saint-Étienne',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Reims',
+                'club' => 'Stade de Reims',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Strasbourg',
+                'club' => 'RC Strasbourg Alsace',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Toulouse',
+                'club' => 'Toulouse FC',
                 'name' => 'Sénior A',
             ], [
-                'club' => 'Troyes',
+                'club' => 'ES Troyes AC',
                 'name' => 'Sénior A',
             ]
         ];

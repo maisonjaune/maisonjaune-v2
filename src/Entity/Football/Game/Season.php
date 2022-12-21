@@ -28,9 +28,13 @@ class Season
     private ?string $slug = null;
 
     #[ORM\Column]
+    private ?int $year = null;
+
+    #[ORM\Column]
     private ?bool $actif = null;
 
     #[ORM\ManyToMany(targetEntity: Team::class)]
+    #[ORM\JoinTable(name: 'football_season_team')]
     private Collection $teams;
 
     #[ORM\OneToMany(mappedBy: 'season', targetEntity: Game::class)]
@@ -40,6 +44,7 @@ class Season
     {
         $this->teams = new ArrayCollection();
         $this->games = new ArrayCollection();
+        $this->actif = false;
     }
 
     public function getId(): ?int
@@ -67,6 +72,18 @@ class Season
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getYear(): ?int
+    {
+        return $this->year;
+    }
+
+    public function setYear(int $year): self
+    {
+        $this->year = $year;
 
         return $this;
     }

@@ -30,55 +30,55 @@ class ClubFixtures extends Fixture
             [
                 'name' => 'Amiens SC',
             ], [
-                'name' => 'Angers',
+                'name' => 'Angers SCO',
             ], [
-                'name' => 'Bordeaux',
+                'name' => 'FC Girondins de Bordeaux',
             ], [
-                'name' => 'Brest',
+                'name' => 'Stade Brestois 29',
             ], [
-                'name' => 'Caen',
+                'name' => 'Stade Malherbe Caen',
             ], [
-                'name' => 'Clermont',
+                'name' => 'Clermont Foot',
             ], [
-                'name' => 'Dijon',
+                'name' => 'Dijon FCO',
             ], [
-                'name' => 'Guingamp',
+                'name' => 'En Avant Guingamp',
             ], [
-                'name' => 'Lens',
+                'name' => 'RC Lens',
             ], [
-                'name' => 'Lorient',
+                'name' => 'FC Lorient',
             ], [
-                'name' => 'LOSC',
+                'name' => 'LOSC Lille',
             ], [
-                'name' => 'Lyon',
+                'name' => 'Olympique Lyonnais',
             ], [
-                'name' => 'Metz',
+                'name' => 'Olympique de Marseille',
             ], [
-                'name' => 'Monaco',
+                'name' => 'FC Metz',
             ], [
-                'name' => 'Montpellier',
+                'name' => 'AS Monaco',
             ], [
-                'name' => 'Nantes',
+                'name' => 'Montpellier HSC',
             ], [
-                'name' => 'Nice',
+                'name' => 'FC Nantes',
             ], [
-                'name' => 'Nîmes',
+                'name' => 'OGC Nice',
             ], [
-                'name' => 'OM',
+                'name' => 'Nîmes Olympique',
             ], [
-                'name' => 'PSG',
+                'name' => 'Paris Saint-Germain',
             ], [
-                'name' => 'Rennes',
+                'name' => 'Stade Rennais FC',
             ], [
-                'name' => 'St-Étienne',
+                'name' => 'AS Saint-Étienne',
             ], [
-                'name' => 'Reims',
+                'name' => 'Stade de Reims',
             ], [
-                'name' => 'Strasbourg',
+                'name' => 'RC Strasbourg Alsace',
             ], [
-                'name' => 'Toulouse',
+                'name' => 'Toulouse FC',
             ], [
-                'name' => 'Troyes',
+                'name' => 'ES Troyes AC',
             ]
         ];
     }
