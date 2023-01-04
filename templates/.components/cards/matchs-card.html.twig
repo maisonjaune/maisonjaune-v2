@@ -1,1 +1,79 @@
-{# TODO HTML du composant affichant le dernier match et le prochain match de l'équipe #}
+{% extends "@component/card.html.twig" %}
+
+{% set card_classes = ['card-match'] %}
+
+{% set card_body_classes = ['d-flex flex-column'] %}
+
+{% set card_footer_classes = ['p-0'] %}
+
+{% block card_header %}
+    Matchs pros
+{% endblock %}
+
+{% block card_body %}
+    <div class="card-title d-flex flex-row card-title-tab" data-display-tab-container="#data-display-tab-container-match">
+        <a href="#" class="flex-grow-1 text-center p-3 tab active w-50" data-display-tab="match-previous">
+            Dernier match
+        </a>
+        <a href="#" class="flex-grow-1 text-center p-3 tab w-50" data-display-tab="match-next">
+            Prochain match
+        </a>
+    </div>
+    <div id="data-display-tab-container-match" class="card-match-body flex-grow-1">
+        <div class="flex-column justify-content-center h-100 d-flex" data-display-tab-content="match-previous">
+            {% if this.previousGame() is defined and this.previousGame() is not null %}
+                <small class="text-center text-muted text-uppercase">
+                    {# TODO : this.previousGame().date | format_datetime(pattern='EEEE dd MMMM yyyy | HH:mm', locale='fr') #}
+                </small>
+                <div class="flex-grow-1 d-flex flex-row align-items-center">
+                    <div class="flex-grow-1 text-right w-50 {{ this.previousGame().isPlayed ? 'mr-1' : 'mr-2' }}">
+                        <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.previousGame().teamHome.club.name }}</span>
+                        {{ sonata_media(this.previousGame().teamHome.club.logo, 'thumbnail', {
+                            alt: this.previousGame().teamHome.club.name,
+                        }) }}
+                        <span class="font-weight-bold">{{ this.previousGame().scoreHome }}</span>
+                    </div>
+                    {% if this.previousGame().isPlayed %}
+                        <span class="d-inline-block mx-1">-</span>
+                    {% endif %}
+                    <div class="flex-grow-1 text-left w-50 {{ this.previousGame().isPlayed ? 'ml-1' : 'ml-2' }}">
+                        <span class="font-weight-bold">{{ this.previousGame().scoreOutside }}</span>
+                        {{ sonata_media(this.previousGame().teamOutside.club.logo, 'thumbnail', {
+                            alt: this.previousGame().teamOutside.club.name,
+                        }) }}
+                        <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.previousGame().teamOutside.club.name }}</span>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center text-muted m-0">
+                    Aucun match
+                </p>
+            {% endif %}
+        </div>
+        <div class="flex-column justify-content-center h-100 d-none" data-display-tab-content="match-next">
+            {% if this.nextGame() is defined and this.nextGame() is not null %}
+                <small class="text-center text-muted text-uppercase">
+                    {# TODO : this.nextGame().date | format_datetime(pattern='EEEE dd MMMM yyyy | HH:mm', locale='fr') #}
+                </small>
+                <div class="flex-grow-1 d-flex flex-row align-items-center">
+                    <div class="flex-grow-1 text-right w-50 mr-2">
+                        <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.nextGame().teamHome.club.name }}</span>
+                        {{ sonata_media(this.nextGame().teamHome.club.logo, 'thumbnail', {
+                            alt: this.nextGame().teamHome.club.name,
+                        }) }}
+                    </div>
+                    <div class="flex-grow-1 text-left w-50 ml-2">
+                        {{ sonata_media(this.nextGame().teamOutside.club.logo, 'thumbnail', {
+                            alt: this.nextGame().teamOutside.club.name,
+                        }) }}
+                        <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.nextGame().teamOutside.club.name }}</span>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center text-muted m-0">
+                    Pas encore de match
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
