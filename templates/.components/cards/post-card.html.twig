@@ -1,6 +1,6 @@
 {% extends "@component/card.html.twig" %}
 
-{% set card_classes = ['card-post'] | merge(card_classes is defined ? [card_classes] : []) %}
+{% set card_classes = ['card-post'] | merge(this.cardClasses is defined ? [this.cardClasses] : []) %}
 {% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
 
 {% block card_content %}

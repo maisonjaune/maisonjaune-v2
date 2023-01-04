@@ -17,7 +17,7 @@ class Team
     #[ORM\Column(length: 150)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'teams')]
+    #[ORM\ManyToOne(inversedBy: 'teams', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Club $club = null;
 

@@ -11,4 +11,6 @@ class CardPostComponent
     public Post $post;
 
     public string $mediaFormat;
+
+    public ?string $cardClasses = null;
 }

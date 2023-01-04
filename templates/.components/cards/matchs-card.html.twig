@@ -1,1 +1,85 @@
-{# TODO HTML du composant affichant le dernier match et le prochain match de l'équipe #}
+{% extends "@component/card.html.twig" %}
+
+{% set card_classes = ['card-match'] | merge(this.cardClasses is defined ? [this.cardClasses] : []) %}
+
+{% set card_body_classes = ['d-flex flex-column'] %}
+
+{% set card_footer_classes = ['p-0'] %}
+
+{% block card_header %}
+    Matchs pros
+{% endblock %}
+
+{% block card_body %}
+    <div x-data="{opened: 'last'}">
+        <div class="card-title d-flex flex-row card-title-tab">
+            <button class="btn border border-0 flex-grow-1 text-center p-3 tab w-50 btn-previous-game"
+                    @click="opened = 'last'"
+                    :class="opened == 'last' ? 'active' : ''">
+                Dernier match
+            </button>
+            <button class="btn border border-0 flex-grow-1 text-center p-3 tab w-50 btn-next-game"
+                    @click="opened = 'next'"
+                    :class="opened == 'next' ? 'active' : ''">
+                Prochain match
+            </button>
+        </div>
+        <div class="card-match-body flex-grow-1">
+            <div class="flex-column justify-content-center h-100 previous-game" :class="opened == 'last' ? 'd-flex' : 'd-none'">
+                {% if this.previousGame() is defined and this.previousGame() is not null %}
+                    <small class="text-center text-muted text-uppercase">
+                        {{ this.previousGame().date | date('d/m/Y H:i:s') }}
+                    </small>
+                    <div class="flex-grow-1 d-flex flex-row align-items-center">
+                        <div class="flex-grow-1 text-end w-50 {{ this.previousGame().isPlayed ? 'me-1' : 'me-2' }}">
+                            <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.previousGame().teamHome.club.name }}</span>
+                            {{ sonata_media(this.previousGame().teamHome.club.logo, 'thumbnail', {
+                                alt: this.previousGame().teamHome.club.name,
+                            }) }}
+                            <span class="font-weight-bold">{{ this.previousGame().scoreHome }}</span>
+                        </div>
+                        {% if this.previousGame().isPlayed %}
+                            <span class="d-inline-block mx-1">-</span>
+                        {% endif %}
+                        <div class="flex-grow-1 text-start w-50 {{ this.previousGame().isPlayed ? 'ms-1' : 'ms-2' }}">
+                            <span class="font-weight-bold">{{ this.previousGame().scoreOutside }}</span>
+                            {{ sonata_media(this.previousGame().teamOutside.club.logo, 'thumbnail', {
+                                alt: this.previousGame().teamOutside.club.name,
+                            }) }}
+                            <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.previousGame().teamOutside.club.name }}</span>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-center text-muted m-0">
+                        Aucun match
+                    </p>
+                {% endif %}
+            </div>
+            <div class="flex-column justify-content-center h-100 next-game" :class="opened == 'next' ? 'd-flex' : 'd-none'">
+                {% if this.nextGame() is defined and this.nextGame() is not null %}
+                    <small class="text-center text-muted text-uppercase">
+                        {{ this.nextGame().date | date('d/m/Y H:i:s') }}
+                    </small>
+                    <div class="flex-grow-1 d-flex flex-row align-items-center">
+                        <div class="flex-grow-1 text-end w-50 me-2">
+                            <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.nextGame().teamHome.club.name }}</span>
+                            {{ sonata_media(this.nextGame().teamHome.club.logo, 'thumbnail', {
+                                alt: this.nextGame().teamHome.club.name,
+                            }) }}
+                        </div>
+                        <div class="flex-grow-1 text-start w-50 ms-2">
+                            {{ sonata_media(this.nextGame().teamOutside.club.logo, 'thumbnail', {
+                                alt: this.nextGame().teamOutside.club.name,
+                            }) }}
+                            <span class="font-weight-bold d-inline d-lg-none d-xl-inline">{{ this.nextGame().teamOutside.club.name }}</span>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-center text-muted m-0">
+                        Pas encore de match
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

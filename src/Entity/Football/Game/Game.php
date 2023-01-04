@@ -111,4 +111,9 @@ class Game
 
         return $this;
     }
+
+    public function isPlayed()
+    {
+        return !!$this->scoreHome && !!$this->scoreOutside;
+    }
 }

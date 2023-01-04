@@ -3,6 +3,7 @@
 namespace App\Repository\Football\Game;
 
 use App\Entity\Football\Game\Game;
+use App\Entity\Football\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,28 +40,24 @@ class GameRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Game[] Returns an array of Game objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findPreviousByTeam(Team $team, \DateTime $date)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.teamHome = :team OR m.teamOutside = :team')->setParameter('team', $team)
+            ->andWhere('m.date <= :date')->setParameter('date', $date)
+            ->orderBy('m.date', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
-//    public function findOneBySomeField($value): ?Game
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findNextByTeam(Team $team, \DateTime $date)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.teamHome = :team OR m.teamOutside = :team')->setParameter('team', $team)
+            ->andWhere('m.date >= :date')->setParameter('date', $date)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -1,6 +1,6 @@
 {% extends "@component/card.html.twig" %}
 
-{% set card_classes = ['card-briefs'] %}
+{% set card_classes = ['card-briefs'] | merge(this.cardClasses is defined ? [this.cardClasses] : []) %}
 
 {% block card_header %}
     {% trans %}Additional time{% endtrans %}

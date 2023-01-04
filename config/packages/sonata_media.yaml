@@ -21,6 +21,11 @@ sonata_media:
                 card_mobile:            { width: 500,  height: 300, quality: 100 }
                 show:                   { width: 728,  height: 406, quality: 100 }
                 opengraph:              { width: 812,  height: 460, quality: 70 }
+        club:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                thumbnail: { width: 48,  height: 48, quality: 100 }
 
     cdn:
         server:
