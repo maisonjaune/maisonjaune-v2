@@ -1,0 +1,50 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}Admin - Edition - {{ object.title }}{% endblock %}
+
+{% block wrapper_start %}
+    {{ form_start(form, {attr: { 'x-data': ("{ title: \"%s\", excerpt: \"%s\"}" | format(object.title, object.excerpt)) }}) }}
+    {{ component('editor-sidebar', {
+        form: form
+    }) }}
+{% endblock %}
+
+{% block content_primary %}
+
+    {{ component('flash') }}
+
+    <div class="mb-3">
+        {% embed "@component/card.html.twig" with { post: object } only %}
+            {% set card_classes = ['card-post-full'] %}
+            {% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
+
+            {% block card_content %}
+                <div class="card-body">
+                    <div class="categories">
+                        {# TODO : champ de modification des categories de l'article #}
+                    </div>
+                    <h5 class="lead" x-text="title"></h5>
+                    <div class="text-muted">
+                        {# TODO : champ de modification de l'auteur de l'article #}
+                    </div>
+                    <hr />
+                    <div class="font-weight-bold mb-3" x-text="excerpt"></div>
+                    <div id="editor" class="post-content classic"></div>
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+
+{% block content_secondary %}
+
+{% endblock %}
+
+{% block wrapper_end %}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('editor') }}
+{% endblock %}

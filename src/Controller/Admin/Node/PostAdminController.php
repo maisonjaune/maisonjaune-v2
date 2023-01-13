@@ -76,10 +76,20 @@ final class PostAdminController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
+        $form = $this->createForm(PostType::class, $post, [
+            'form_type' => FormPostType::TYPE_WRITE
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
+
         return $this->renderWithExtraParams('@SonataAdmin/CRUD/node/post/edit.html.twig', [
             'action' => 'edit',
             'object' => $post,
-            'objectId' => null,
+            'form' => $form->createView(),
         ]);
     }
 }
