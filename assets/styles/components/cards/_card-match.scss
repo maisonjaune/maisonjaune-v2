@@ -13,4 +13,17 @@
     .card-match-body {
         margin: 0 -20px;
     }
+
+    .btn-previous-game {
+        color: $black;
+        border-bottom: 2px solid $black;
+    }
+
+    .previous-game {
+        display: flex;
+    }
+
+    .next-game {
+        display: none;
+    }
 }

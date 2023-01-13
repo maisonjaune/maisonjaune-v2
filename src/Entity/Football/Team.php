@@ -6,6 +6,7 @@ use App\Repository\Football\TeamRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
+#[ORM\Table(name: "football_team")]
 class Team
 {
     #[ORM\Id]
@@ -16,7 +17,7 @@ class Team
     #[ORM\Column(length: 150)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'teams')]
+    #[ORM\ManyToOne(inversedBy: 'teams', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Club $club = null;
 

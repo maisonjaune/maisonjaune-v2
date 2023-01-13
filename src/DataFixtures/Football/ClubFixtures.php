@@ -5,9 +5,22 @@ namespace App\DataFixtures\Football;
 use App\Entity\Football\Club;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Sonata\MediaBundle\Model\MediaManagerInterface;
+use Sonata\MediaBundle\Provider\ImageProvider;
+use Sonata\MediaBundle\Provider\ImageProviderInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ClubFixtures extends Fixture
 {
+    public function __construct(
+        #[Autowire(service: 'sonata.media.manager.media')] private MediaManagerInterface   $mediaManager,
+        #[Autowire(service: 'sonata.media.provider.image')] private ImageProviderInterface $imageProvider,
+        #[Autowire('%kernel.project_dir%')] private string                                 $projectDir,
+    )
+    {
+    }
+
     public function load(ObjectManager $manager)
     {
         foreach ($this->getData() as $data) {
@@ -15,6 +28,18 @@ class ClubFixtures extends Fixture
 
             $entity
                 ->setName($data['name']);
+
+            $logo = $this->mediaManager->create();
+
+            $logo->setBinaryContent(new UploadedFile($this->projectDir . '/assets/fixtures/clubs/' . $data['logo'], $data['name'] . '.png'));
+            $logo->setContext('club');
+            $logo->setProviderName('sonata.media.provider.image');
+
+            if ($this->imageProvider instanceof ImageProvider) {
+                $this->imageProvider->transform($logo);
+            }
+
+            $entity->setLogo($logo);
 
             $manager->persist($entity);
 
@@ -29,56 +54,82 @@ class ClubFixtures extends Fixture
         return [
             [
                 'name' => 'Amiens SC',
+                'logo' => 'Amiens SC.png',
             ], [
-                'name' => 'Angers',
+                'name' => 'Angers SCO',
+                'logo' => 'Angers.png',
             ], [
-                'name' => 'Bordeaux',
+                'name' => 'FC Girondins de Bordeaux',
+                'logo' => 'Bordeaux.png',
             ], [
-                'name' => 'Brest',
+                'name' => 'Stade Brestois 29',
+                'logo' => 'Brest.png',
             ], [
-                'name' => 'Caen',
+                'name' => 'Stade Malherbe Caen',
+                'logo' => 'Caen.png',
             ], [
-                'name' => 'Clermont',
+                'name' => 'Clermont Foot',
+                'logo' => 'Clermont.png',
             ], [
-                'name' => 'Dijon',
+                'name' => 'Dijon FCO',
+                'logo' => 'Dijon.png',
             ], [
-                'name' => 'Guingamp',
+                'name' => 'En Avant Guingamp',
+                'logo' => 'Guingamp.png',
             ], [
-                'name' => 'Lens',
+                'name' => 'RC Lens',
+                'logo' => 'Lens.png',
             ], [
-                'name' => 'Lorient',
+                'name' => 'FC Lorient',
+                'logo' => 'Lorient.png',
             ], [
-                'name' => 'LOSC',
+                'name' => 'LOSC Lille',
+                'logo' => 'LOSC.png',
             ], [
-                'name' => 'Lyon',
+                'name' => 'Olympique Lyonnais',
+                'logo' => 'Lyon.png',
             ], [
-                'name' => 'Metz',
+                'name' => 'Olympique de Marseille',
+                'logo' => 'OM.png',
             ], [
-                'name' => 'Monaco',
+                'name' => 'FC Metz',
+                'logo' => 'Metz.png',
             ], [
-                'name' => 'Montpellier',
+                'name' => 'AS Monaco',
+                'logo' => 'Monaco.png',
             ], [
-                'name' => 'Nantes',
+                'name' => 'Montpellier HSC',
+                'logo' => 'Montpellier.png',
             ], [
-                'name' => 'Nice',
+                'name' => 'FC Nantes',
+                'logo' => 'Nantes.png',
             ], [
-                'name' => 'Nîmes',
+                'name' => 'OGC Nice',
+                'logo' => 'Nice.png',
             ], [
-                'name' => 'OM',
+                'name' => 'Nîmes Olympique',
+                'logo' => 'Nîmes.png',
             ], [
-                'name' => 'PSG',
+                'name' => 'Paris Saint-Germain',
+                'logo' => 'PSG.png',
             ], [
-                'name' => 'Rennes',
+                'name' => 'Stade Rennais FC',
+                'logo' => 'Rennes.png',
             ], [
-                'name' => 'St-Étienne',
+                'name' => 'AS Saint-Étienne',
+                'logo' => 'St-Étienne.png',
             ], [
-                'name' => 'Reims',
+                'name' => 'Stade de Reims',
+                'logo' => 'Reims.png',
             ], [
-                'name' => 'Strasbourg',
+                'name' => 'RC Strasbourg Alsace',
+                'logo' => 'Strasbourg.png',
             ], [
-                'name' => 'Toulouse',
+                'name' => 'Toulouse FC',
+                'logo' => 'Toulouse.png',
             ], [
-                'name' => 'Troyes',
+                'name' => 'ES Troyes AC',
+                'logo' => 'Troyes.png',
             ]
         ];
     }

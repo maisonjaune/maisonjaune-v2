@@ -2,12 +2,14 @@
 
 namespace App\Entity\Football;
 
+use App\Entity\Media\Media;
 use App\Repository\Football\ClubRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClubRepository::class)]
+#[ORM\Table(name: "football_club")]
 class Club
 {
     #[ORM\Id]
@@ -17,6 +19,10 @@ class Club
 
     #[ORM\Column(length: 150)]
     private ?string $name = null;
+
+    #[ORM\ManyToOne(cascade: ["persist"])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Media $logo = null;
 
     #[ORM\OneToMany(mappedBy: 'club', targetEntity: Team::class, orphanRemoval: true)]
     private Collection $teams;
@@ -39,6 +45,18 @@ class Club
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLogo(): ?Media
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?Media $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }

@@ -15,6 +15,8 @@ class CardBriefListComponent
 
     public array $briefs = [];
 
+    public ?string $cardClasses = null;
+
     public function __construct(BriefProviderInterface $briefProvider)
     {
         $this->briefs = null !== $this->category

@@ -16,7 +16,7 @@ class DefaultParameterFixtures extends Fixture
             ->setDomain('default')
             ->setName('favorite_team')
             ->setService(EntityTypeTeamOptionFormBuilder::NAME)
-            ->setValue(null)
+            ->setValue(17)
         );
 
         $manager->persist((new Parameter())
