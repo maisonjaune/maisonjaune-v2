@@ -1,0 +1,32 @@
+version: '3'
+
+vars:
+    DOCKER_COMPOSE: "docker compose --env-file=.docker/.env"
+    SYMFONY_BIN: "{{.DOCKER_COMPOSE}} run -T --rm --no-deps web php bin/console"
+
+tasks:
+    help:
+        desc: Affichage d'une aide
+        cmds:
+            - "task --list-all"
+
+    docker:up:
+        desc: Démarrage des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} up -d"
+
+    docker:down:
+        desc: Arrêt des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} down"
+
+    docker:build:
+        desc: Arrêt des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} build"
+
+    symfony:cache:clear:
+        aliases: ["cache:clear"]
+        desc: Suppression du cache de votre application
+        cmds:
+            - "{{.SYMFONY_BIN}} cache:clear"
