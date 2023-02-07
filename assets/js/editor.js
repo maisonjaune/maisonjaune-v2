@@ -7,7 +7,9 @@ const editor = new EditorJS({
     placeholder: 'Rédigez votre article ici !',
 
     onReady() {
-        editor.blocks.render(JSON.parse(content.value))
+        if (content.value) {
+            editor.blocks.render(JSON.parse(content.value))
+        }
     },
 
     onChange() {
@@ -17,10 +19,6 @@ const editor = new EditorJS({
 
 function save() {
     editor.save()
-        .then((savedData) => {
-            content.innerText = JSON.stringify(savedData)
-        })
-        .catch((error) => {
-            console.log("Erreur lors de l'enregistrement", error)
-        })
+        .then((savedData) => content.value = JSON.stringify(savedData))
+        .catch((error) => console.log("Erreur lors de l'enregistrement", error))
 }

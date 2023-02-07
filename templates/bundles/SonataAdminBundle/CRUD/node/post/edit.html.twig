@@ -3,7 +3,7 @@
 {% block title %}Admin - Edition - {{ object.title }}{% endblock %}
 
 {% block wrapper_start %}
-    {{ form_start(form, {attr: { 'x-data': ("{ title: \"%s\", excerpt: \"%s\"}" | format(object.title, object.excerpt)) }}) }}
+    {{ form_start(form, { attr: { 'x-data': editor_post_data(object) }}) }}
     {{ component('editor-sidebar', {
         form: form
     }) }}
@@ -19,10 +19,9 @@
             {% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
 
             {% block card_content %}
+                <img src="https://dummyimage.com/768x432/bdc3c7/7f8c8d" alt="Image à la une"/>
                 <div class="card-body">
-                    <div class="categories">
-                        {# TODO : champ de modification des categories de l'article #}
-                    </div>
+                    <div class="categories" x-text="breadcrumbCategories(categories)"></div>
                     <h5 class="lead" x-text="title"></h5>
                     <div class="text-muted">
                         {# TODO : champ de modification de l'auteur de l'article #}
@@ -37,7 +36,10 @@
 {% endblock %}
 
 {% block content_secondary %}
-
+    <div class="mb-3">
+        {{ component('card-brief_list') }}
+    </div>
+    {{ component('last_posts.block') }}
 {% endblock %}
 
 {% block wrapper_end %}
@@ -47,4 +49,11 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('editor') }}
+    <script>
+        function breadcrumbCategories(categories) {
+            console.log(categories);
+            console.log(document.querySelector('[data-editor="categories"]'));
+            return 'CAT 1 / CAT 2';
+        }
+    </script>
 {% endblock %}

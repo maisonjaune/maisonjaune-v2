@@ -9,6 +9,7 @@ use App\Enum\Node\FormPostType;
 use App\Form\Node\PostType;
 use App\Workflow\Place\PostTransition;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,7 +84,14 @@ final class PostAdminController extends CRUDController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            try {
+                $this->admin->update($post);
+                return $this->redirectTo($request, $post);
+            } catch (LockException $e) {
+                // TODO handle lock exception
+            } catch (ModelManagerThrowable $e) {
+                // TODO handle model manager throwable
+            }
         }
 
         return $this->renderWithExtraParams('@SonataAdmin/CRUD/node/post/edit.html.twig', [

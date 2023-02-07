@@ -2,8 +2,10 @@
 
 namespace App\Form\Node;
 
+use App\Entity\Node\Category;
 use App\Entity\Node\Post;
 use App\Enum\Node\FormPostType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,6 +38,16 @@ class PostType extends AbstractType
                     'attr' => [
                         'data-editor' => "content"
                     ]
+                ])
+                ->add('categories', EntityType::class, [
+                    'class' => Category::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded' => true,
+                    'attr' => [
+                        'data-editor' => "categories"
+                    ],
+                    'choice_attr' => fn() => ['x-model' => 'categories'],
                 ]);
         }
 

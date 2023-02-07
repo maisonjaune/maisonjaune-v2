@@ -19,7 +19,7 @@ sonata_media:
                 card_secondary:         { width: 538,  height: 300, quality: 100 }
                 card_sidebar:           { width: 348,  height: 195, quality: 100 }
                 card_mobile:            { width: 500,  height: 300, quality: 100 }
-                show:                   { width: 728,  height: 406, quality: 100 }
+                show:                   { width: 768,  height: 432, quality: 100 }
                 opengraph:              { width: 812,  height: 460, quality: 70 }
         club:
             providers:
