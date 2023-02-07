@@ -21,7 +21,7 @@ class PostType extends AbstractType
             $builder
                 ->add('title', null, [
                     'attr' => [
-                        'x-model' => "title"
+                        'data-input' => "title"
                     ]
                 ])
                 ->add('slug');
@@ -31,12 +31,12 @@ class PostType extends AbstractType
             $builder
                 ->add('excerpt', null, [
                     'attr' => [
-                        'x-model' => "excerpt"
+                        'data-input' => "excerpt"
                     ]
                 ])
                 ->add('content', HiddenType::class, [
                     'attr' => [
-                        'data-editor' => "content"
+                        'data-input' => "content"
                     ]
                 ])
                 ->add('categories', EntityType::class, [
@@ -45,9 +45,9 @@ class PostType extends AbstractType
                     'multiple' => true,
                     'expanded' => true,
                     'attr' => [
-                        'data-editor' => "categories"
+                        'data-input' => "categories",
+                        'data-callback' => "checkboxesRenderer",
                     ],
-                    'choice_attr' => fn() => ['x-model' => 'categories'],
                 ]);
         }
 

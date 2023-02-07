@@ -4,6 +4,7 @@ vars:
     DOCKER_COMPOSE: "docker compose --env-file=.docker/.env"
     DOCKER_COMPOSE_RUN: "{{.DOCKER_COMPOSE}} run -T --rm --no-deps"
     DOCKER_COMPOSE_EXEC: "{{.DOCKER_COMPOSE}} exec"
+    DOCKER_COMPOSE_LOG: "{{.DOCKER_COMPOSE}} logs -f"
     SYMFONY_BIN: "{{.DOCKER_COMPOSE_EXEC}} web php bin/console"
 
 includes:
@@ -46,6 +47,16 @@ tasks:
         desc: Démarrage des containers Docker
         cmds:
             - "{{.DOCKER_COMPOSE_EXEC}} {{.CLI_ARGS}} bash"
+
+    docker:node:watch:
+        desc: Arrêt des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE_RUN}} node npm run watch"
+
+    docker:node:logs:
+        desc: Arrêt des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE_LOG}} node"
 
     docker:down:
         desc: Arrêt des containers Docker

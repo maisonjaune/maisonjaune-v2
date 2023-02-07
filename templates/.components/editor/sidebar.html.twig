@@ -1,8 +1,10 @@
 <div class="sidebar-tools">
-    {{ form_widget(form) }}
-    <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">
-            {% trans %}Save{% endtrans %}
-        </button>
-    </div>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">
+                {% trans %}Save{% endtrans %}
+            </button>
+        </div>
+    {{ form_end(form) }}
 </div>

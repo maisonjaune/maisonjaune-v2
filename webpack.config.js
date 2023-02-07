@@ -25,7 +25,6 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('recaptcha', './assets/recaptcha.js')
     .addEntry('cookies', './assets/cookies.js')
-    .addEntry('editor', './assets/js/editor.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

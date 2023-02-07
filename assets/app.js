@@ -7,10 +7,12 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
+import editor from './js/editor';
 
 // start AlpineJS
 import Alpine from 'alpinejs'
 
-window.Alpine = Alpine
+Alpine.plugin(editor)
 
-Alpine.start()
+window.Alpine = Alpine
+window.Alpine.start()
