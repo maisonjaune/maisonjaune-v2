@@ -4,6 +4,11 @@ vars:
     DOCKER_COMPOSE: "docker compose --env-file=.docker/.env"
     SYMFONY_BIN: "{{.DOCKER_COMPOSE}} run -T --rm --no-deps web php bin/console"
 
+includes:
+    docker:
+        taskfile: ./.taskfiles/Taskfile.docker.yml
+        optional: true
+
 tasks:
     help:
         desc: Affichage d'une aide

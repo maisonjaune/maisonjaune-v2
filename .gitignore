@@ -3,6 +3,10 @@
 /nbproject/
 ###< IDE ###
 
+###> Taskfile ###
+/.taskfiles/
+###< Docker ###
+
 ###> Docker ###
 /.docker/.env
 /.docker/environment/.local/
