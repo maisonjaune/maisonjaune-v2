@@ -5,6 +5,7 @@
 
 ###> Docker ###
 /.docker/.env
+/.docker/environment/.local/
 /.docker/services/database/data/
 /.docker/services/database/import/
 /.bash_history
