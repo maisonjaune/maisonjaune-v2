@@ -15,23 +15,45 @@ tasks:
         cmds:
             - "task --list-all"
 
+    docker:build:
+        desc: Arrêt des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} build"
+
     docker:up:
         desc: Démarrage des containers Docker
         cmds:
             - "{{.DOCKER_COMPOSE}} up -d"
+
+    docker:ps:
+        desc: Affichage des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} ps"
+
+    docker:bash:
+        desc: Démarrage des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} exec {{.CLI_ARGS}} bash"
 
     docker:down:
         desc: Arrêt des containers Docker
         cmds:
             - "{{.DOCKER_COMPOSE}} down"
 
-    docker:build:
-        desc: Arrêt des containers Docker
-        cmds:
-            - "{{.DOCKER_COMPOSE}} build"
-
     symfony:cache:clear:
         aliases: ["cache:clear"]
         desc: Suppression du cache de votre application
         cmds:
             - "{{.SYMFONY_BIN}} cache:clear"
+
+    symfony:server:dump:
+        aliases: ["server:dump"]
+        desc: Démarrage d'un serveur de dumps permettant l'affichage les dumps en un seul endroit
+        cmds:
+            - "{{.SYMFONY_BIN}} server:dump"
+
+    symfony:server:log:
+        aliases: ["server:log"]
+        desc: Démarrage d'un serveur de logs affichant les logs en temps réel
+        cmds:
+            - "{{.SYMFONY_BIN}} server:log"
