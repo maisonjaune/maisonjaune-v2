@@ -2,7 +2,9 @@ version: '3'
 
 vars:
     DOCKER_COMPOSE: "docker compose --env-file=.docker/.env"
-    SYMFONY_BIN: "{{.DOCKER_COMPOSE}} run -T --rm --no-deps web php bin/console"
+    DOCKER_COMPOSE_RUN: "{{.DOCKER_COMPOSE}} run -T --rm --no-deps"
+    DOCKER_COMPOSE_EXEC: "{{.DOCKER_COMPOSE}} exec"
+    SYMFONY_BIN: "{{.DOCKER_COMPOSE_EXEC}} web php bin/console"
 
 includes:
     docker:
@@ -26,14 +28,24 @@ tasks:
             - "{{.DOCKER_COMPOSE}} up -d"
 
     docker:ps:
-        desc: Affichage des containers Docker
+        desc: Visualisation de l'état des containers Docker
         cmds:
             - "{{.DOCKER_COMPOSE}} ps"
+
+    docker:config:
+        desc: Visualisation de la configuration des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE}} config"
+
+    docker:exec:
+        desc: Exécute une commande dans un container
+        cmds:
+            - "{{.DOCKER_COMPOSE_EXEC}} {{.CLI_ARGS}}"
 
     docker:bash:
         desc: Démarrage des containers Docker
         cmds:
-            - "{{.DOCKER_COMPOSE}} exec {{.CLI_ARGS}} bash"
+            - "{{.DOCKER_COMPOSE_EXEC}} {{.CLI_ARGS}} bash"
 
     docker:down:
         desc: Arrêt des containers Docker
@@ -57,3 +69,9 @@ tasks:
         desc: Démarrage d'un serveur de logs affichant les logs en temps réel
         cmds:
             - "{{.SYMFONY_BIN}} server:log"
+
+    symfony:make:twig-extension:
+        aliases: ["make:twig-extension"]
+        desc: Permet de créer une extension Twig
+        cmds:
+            - "{{.SYMFONY_BIN}} make:twig-extension {{.CLI_ARGS}}"
