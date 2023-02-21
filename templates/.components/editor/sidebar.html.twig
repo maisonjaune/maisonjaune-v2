@@ -1,10 +1,32 @@
-<div class="sidebar-tools">
+<div class="sidebar-tools" x-data="{ modal: new $modal(document.getElementById('post-save-modal')) }">
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" @click="modal.show()">
                 {% trans %}Save{% endtrans %}
             </button>
+        </div>
+
+        <div id="post-save-modal" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{% trans %}Registration{% endtrans %}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="modal.hide()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{% trans %}How to save your post ?{% endtrans %}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="btn_update">
+                            {% trans %}Save to draft{% endtrans %}
+                        </button>
+                        <button type="submit" class="btn btn-primary" name="btn_update_and_list">
+                            {% trans %}Finish{% endtrans %}
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     {{ form_end(form) }}
 </div>

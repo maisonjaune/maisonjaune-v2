@@ -85,7 +85,12 @@ final class PostAdminController extends CRUDController
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                if (null !== $request->get('btn_update_and_list')) {
+                    $post->setDraft(false);
+                }
+
                 $this->admin->update($post);
+
                 return $this->redirectTo($request, $post);
             } catch (LockException $e) {
                 // TODO handle lock exception

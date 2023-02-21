@@ -48,6 +48,11 @@ tasks:
         cmds:
             - "{{.DOCKER_COMPOSE_EXEC}} {{.CLI_ARGS}} bash"
 
+    docker:node:bash:
+        desc: Arrêt des containers Docker
+        cmds:
+            - "{{.DOCKER_COMPOSE_EXEC}} node bash"
+
     docker:node:watch:
         desc: Arrêt des containers Docker
         cmds:
