@@ -1,6 +1,6 @@
 import EditorJS from '@editorjs/editorjs'
 
-import renderer from "./renderer";
+import renderer from "./renderer"
 
 export default function (Alpine) {
     document.addEventListener('alpine:init', () => {
@@ -28,18 +28,18 @@ export default function (Alpine) {
             inputs.forEach((input) => {
                 const callback = input.hasAttribute('data-callback')
                     ? input.getAttribute('data-callback')
-                    : 'textRenderer';
+                    : 'textRenderer'
 
-                console.log(callback);
+                console.log(callback)
 
                 input.addEventListener('change', (e) => renderer.run(callback, el, input, e))
             })
         })
     })
 
-function save() {
-    // editor.save()
-    //     .then((savedData) => content.value = JSON.stringify(savedData))
-    //     .catch((error) => console.log("Erreur lors de l'enregistrement", error))
-}
+    function save() {
+        // editor.save()
+        //     .then((savedData) => content.value = JSON.stringify(savedData))
+        //     .catch((error) => console.log("Erreur lors de l'enregistrement", error))
+    }
 }
