@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Form\Type\DateTimePickerType;
 use Sonata\MediaBundle\Form\Type\MediaType;
@@ -19,6 +20,25 @@ use Symfony\Component\Workflow\WorkflowInterface;
 
 final class PostAdmin extends AbstractAdmin
 {
+    public const PERMISSION_REVIEW = 'REVIEW';
+
+    public const PERMISSION_IMAGE = 'IMAGE';
+
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection
+            ->add('review', $this->getRouterIdParameter() . '/review')
+            ->add('image', $this->getRouterIdParameter() . '/image');
+    }
+
+    protected function getAccessMapping(): array
+    {
+        return [
+            'review' => self::PERMISSION_REVIEW,
+            'image' => self::PERMISSION_IMAGE,
+        ];
+    }
+
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
@@ -38,8 +58,9 @@ final class PostAdmin extends AbstractAdmin
             ->add('commentable')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
+                    'review' => [],
+                    'image' => [],
                     'delete' => [],
                 ],
             ]);

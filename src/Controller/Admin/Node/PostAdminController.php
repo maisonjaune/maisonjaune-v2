@@ -12,8 +12,10 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 final class PostAdminController extends CRUDController
@@ -45,8 +47,7 @@ final class PostAdminController extends CRUDController
             } catch (ModelManagerThrowable $e) {
                 $this->addFlash('sonata_flash_error',  $this->handleModelManagerThrowable($e) ?? $this->trans('flash_create_error', [
                     '%name%' => $this->escapeHtml($this->admin->toString($post))
-                ], 'SonataAdminBundle')
-                );
+                ], 'SonataAdminBundle'));
             }
 
             return $this->redirectTo($request, $post);
@@ -104,5 +105,31 @@ final class PostAdminController extends CRUDController
             'object' => $post,
             'form' => $form->createView(),
         ]);
+    }
+
+    protected function reviewAction(int $id): ?Response
+    {
+        $object = $this->admin->getSubject();
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
+        }
+
+        $this->addFlash('sonata_flash_success', 'Examined successfully');
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+
+    protected function imageAction(int $id): ?Response
+    {
+        $object = $this->admin->getSubject();
+
+        if (!$object) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
+        }
+
+        $this->addFlash('sonata_flash_success', 'Image added successfully');
+
+        return new RedirectResponse($this->admin->generateUrl('list'));
     }
 }
