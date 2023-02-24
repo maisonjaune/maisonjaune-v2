@@ -1,0 +1,19 @@
+{% if admin.hasAccess('unpublish', object) and admin.hasRoute('unpublish') %}
+    {% set button_content = sonata_config.getOption('list_action_button_content') %}
+    <a
+            href="{{ admin.generateObjectUrl('unpublish', object, actions.link_parameters|default([])) }}"
+            class="btn btn-sm btn-default edit_link"
+            title="{{ 'action_unpublish'|trans({}, 'SonataAdminBundle') }}"
+    >
+        {% if button_content == 'icon' or button_content == 'all' %}
+            <i class="fas fa-minus-square" aria-hidden="true"></i>
+        {% endif %}
+        {% if button_content == 'text' or button_content == 'all' %}
+            {{ 'action_unpublish'|trans({}, 'SonataAdminBundle') }}
+        {% else %}
+            <span class="sr-only">
+                {{ 'action_unpublish'|trans({}, 'SonataAdminBundle') }}
+            </span>
+        {% endif %}
+    </a>
+{% endif %}

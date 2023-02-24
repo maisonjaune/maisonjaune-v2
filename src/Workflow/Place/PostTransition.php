@@ -4,11 +4,13 @@ namespace App\Workflow\Place;
 
 enum PostTransition: string
 {
+    case DRAFT = 'Draft';
+
     case WRITE = 'Write';
 
     case DECORATE = 'Decorate';
 
-    case EXAMINE = 'Examine';
+    case REVIEW = 'Review';
 
     case PUBLISH = 'Publish';
 

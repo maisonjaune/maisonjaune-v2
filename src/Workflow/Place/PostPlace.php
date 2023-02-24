@@ -6,9 +6,11 @@ enum PostPlace: string
 {
     case INITIALISATION = 'Initialisation';
 
-    case IN_WRITING = 'In writing';
+    case IN_DRAFT = 'In draft';
 
-    case EXAMINED = 'Examined';
+    case WROTE = 'Wrote';
+
+    case REVIEWED = 'Reviewed';
 
     case DECORATED = 'Decorated';
 
