@@ -1,0 +1,15 @@
+{% extends get_admin_template('base_list_field', admin.code) %}
+
+{% block field %}
+    <div class="btn-group">
+        {% for action in field_description.option('actions') %}
+            {% if action.workflow is defined %}
+                {% if workflow_can(object, action.workflow.value) %}
+                    {% include action.template %}
+                {% endif %}
+            {% else %}
+                {% include action.template %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -20,12 +20,13 @@ class NodePostMarkingStore implements MarkingStoreInterface
         $marking->mark(PostPlace::INITIALISATION->value);
 
         if (null !== $subject->getTitle() && null !== $subject->getSlug()) {
-            $marking->mark(PostPlace::IN_WRITING->value);
+            $marking->unmark(PostPlace::INITIALISATION->value);
+            $marking->mark(PostPlace::IN_DRAFT->value);
         }
 
         if (!$subject->isDraft()) {
-            $marking->mark(PostPlace::DECORATED->value);
-            $marking->mark(PostPlace::EXAMINED->value);
+            $marking->unmark(PostPlace::IN_DRAFT->value);
+            $marking->mark(PostPlace::WROTE->value);
         }
 
         return $marking;

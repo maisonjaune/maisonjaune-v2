@@ -17,7 +17,7 @@ class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if (in_array($options['form_type'], [FormPostType::TYPE_CREATE, FormPostType::TYPE_WRITE])) {
+        if (in_array($options['form_type'], [FormPostType::TYPE_CREATE, FormPostType::TYPE_WRITE, FormPostType::TYPE_REVIEW])) {
             $builder
                 ->add('title', null, [
                     'attr' => [
@@ -27,7 +27,7 @@ class PostType extends AbstractType
                 ->add('slug');
         }
 
-        if (in_array($options['form_type'], [FormPostType::TYPE_WRITE, FormPostType::TYPE_EXAMINE])) {
+        if (in_array($options['form_type'], [FormPostType::TYPE_WRITE, FormPostType::TYPE_REVIEW])) {
             $builder
                 ->add('excerpt', null, [
                     'attr' => [
@@ -38,17 +38,21 @@ class PostType extends AbstractType
                     'attr' => [
                         'data-input' => "content"
                     ]
-                ])
-                ->add('categories', EntityType::class, [
-                    'class' => Category::class,
-                    'choice_label' => 'name',
-                    'multiple' => true,
-                    'expanded' => true,
-                    'attr' => [
-                        'data-input' => "categories",
-                        'data-callback' => "checkboxesRenderer",
-                    ],
                 ]);
+
+            if (in_array($options['form_type'], [FormPostType::TYPE_WRITE])) {
+                $builder
+                    ->add('categories', EntityType::class, [
+                        'class' => Category::class,
+                        'choice_label' => 'name',
+                        'multiple' => true,
+                        'expanded' => true,
+                        'attr' => [
+                            'data-input' => "categories",
+                            'data-callback' => "checkboxesRenderer",
+                        ],
+                    ]);
+            }
         }
 
         if ($options['form_type'] === FormPostType::TYPE_DECORATE) {

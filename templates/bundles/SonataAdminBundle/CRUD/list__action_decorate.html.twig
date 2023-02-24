@@ -1,18 +1,18 @@
-{% if admin.hasAccess('image', object) and admin.hasRoute('image') %}
+{% if admin.hasAccess('decorate', object) and admin.hasRoute('decorate') %}
     {% set button_content = sonata_config.getOption('list_action_button_content') %}
     <a
-            href="{{ admin.generateObjectUrl('image', object, actions.link_parameters|default([])) }}"
+            href="{{ admin.generateObjectUrl('decorate', object, actions.link_parameters|default([])) }}"
             class="btn btn-sm btn-default edit_link"
-            title="{{ 'action_image'|trans({}, 'SonataAdminBundle') }}"
+            title="{{ 'action_decorate'|trans({}, 'SonataAdminBundle') }}"
     >
         {% if button_content == 'icon' or button_content == 'all' %}
             <i class="fas fa-image" aria-hidden="true"></i>
         {% endif %}
         {% if button_content == 'text' or button_content == 'all' %}
-            {{ 'action_image'|trans({}, 'SonataAdminBundle') }}
+            {{ 'action_decorate'|trans({}, 'SonataAdminBundle') }}
         {% else %}
             <span class="sr-only">
-                {{ 'action_image'|trans({}, 'SonataAdminBundle') }}
+                {{ 'action_decorate'|trans({}, 'SonataAdminBundle') }}
             </span>
         {% endif %}
     </a>

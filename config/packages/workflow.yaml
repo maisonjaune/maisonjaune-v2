@@ -9,23 +9,27 @@ framework:
             initial_marking: Initialisation
             places:
                 - Initialisation
-                - In writing
-                - Examined
+                - In draft
+                - Wrote
+                - Reviewed
                 - Decorated
                 - UnPublished
                 - Published
             transitions:
-                Write:
+                Draft:
                     from: [Initialisation]
-                    to: In writing
+                    to: In draft
+                Write:
+                    from: [In draft]
+                    to: Wrote
                 Decorate:
-                    from: [In writing]
+                    from: [Wrote]
                     to: Decorated
-                Examine:
-                    from: [In writing]
-                    to: Examined
+                Review:
+                    from: [Wrote]
+                    to: Reviewed
                 Publish:
-                    from: [Examined, Decorated]
+                    from: [Reviewed, Decorated]
                     to: Published
                 Unpublish:
                     from: [Published]

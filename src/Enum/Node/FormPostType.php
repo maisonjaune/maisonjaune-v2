@@ -8,7 +8,7 @@ enum FormPostType: string
 
     case TYPE_WRITE = 'write';
 
-    case TYPE_EXAMINE = 'examine';
+    case TYPE_REVIEW = 'review';
 
     case TYPE_DECORATE = 'decorate';
 

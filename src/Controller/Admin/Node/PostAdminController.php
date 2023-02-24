@@ -87,7 +87,7 @@ final class PostAdminController extends CRUDController
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 if (null !== $request->get('btn_update_and_list')) {
-                    $post->setDraft(false);
+                    $this->postWorkflow->apply($post, PostTransition::WRITE->value);
                 }
 
                 $this->admin->update($post);
@@ -107,28 +107,102 @@ final class PostAdminController extends CRUDController
         ]);
     }
 
-    protected function reviewAction(int $id): ?Response
+    public function reviewAction(Request $request, int $id): ?Response
     {
-        $object = $this->admin->getSubject();
+        $post = $this->admin->getSubject();
 
-        if (!$object) {
+        $form = $this->createForm(PostType::class, $post, [
+            'form_type' => FormPostType::TYPE_REVIEW
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                if (null !== $request->get('btn_update_and_list')) {
+                    $this->postWorkflow->apply($post, PostTransition::REVIEW->value);
+                }
+
+                $this->admin->update($post);
+
+                return $this->redirectTo($request, $post);
+            } catch (LockException $e) {
+                // TODO handle lock exception
+            } catch (ModelManagerThrowable $e) {
+                // TODO handle model manager throwable
+            }
+        }
+
+        return $this->renderWithExtraParams('@SonataAdmin/CRUD/node/post/edit.html.twig', [
+            'action' => 'review',
+            'object' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function decorateAction(Request $request, int $id): ?Response
+    {
+        $post = $this->admin->getSubject();
+
+        $form = $this->createForm(PostType::class, $post, [
+            'form_type' => FormPostType::TYPE_DECORATE
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                if (null !== $request->get('btn_update_and_list')) {
+                    $this->postWorkflow->apply($post, PostTransition::DECORATE->value);
+                }
+
+                $this->admin->update($post);
+
+                return $this->redirectTo($request, $post);
+            } catch (LockException $e) {
+                // TODO handle lock exception
+            } catch (ModelManagerThrowable $e) {
+                // TODO handle model manager throwable
+            }
+        }
+
+        return $this->renderWithExtraParams('@SonataAdmin/CRUD/node/post/edit.html.twig', [
+            'action' => 'review',
+            'object' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function publishAction(int $id): ?Response
+    {
+        $post = $this->admin->getSubject();
+
+        if (!$post) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
-        $this->addFlash('sonata_flash_success', 'Examined successfully');
+        if (!$this->postWorkflow->can($post, PostTransition::PUBLISH->value)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $this->addFlash('sonata_flash_success', 'Decorated successfully');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
 
-    protected function imageAction(int $id): ?Response
+    public function unpublishAction(int $id): ?Response
     {
-        $object = $this->admin->getSubject();
+        $post = $this->admin->getSubject();
 
-        if (!$object) {
+        if (!$post) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
-        $this->addFlash('sonata_flash_success', 'Image added successfully');
+        if (!$this->postWorkflow->can($post, PostTransition::UNPUBLISH->value)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $this->addFlash('sonata_flash_success', 'Decorated successfully');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
