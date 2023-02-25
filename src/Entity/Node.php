@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Draftable;
 use App\Repository\NodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: NodeRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "node_type", type: "string")]
-abstract class Node
+abstract class Node implements Draftable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -38,7 +39,7 @@ abstract class Node
     protected ?bool $actif = false;
 
     #[ORM\Column]
-    protected ?bool $draft = false;
+    protected bool $draft = true;
 
     #[ORM\Column]
     protected ?bool $sticky = false;
@@ -51,7 +52,6 @@ abstract class Node
 
     public function __construct()
     {
-        $this->draft = true;
         $this->sticky = false;
         $this->commentable = true;
         $this->actif = false;
@@ -98,6 +98,12 @@ abstract class Node
         return $this;
     }
 
+    public function isPublished(): bool
+    {
+        return null !== $this->publishedAt
+            && $this->publishedAt <= new \DateTimeImmutable();
+    }
+
     public function getPublishedAt(): ?\DateTimeImmutable
     {
         return $this->publishedAt;
@@ -122,7 +128,7 @@ abstract class Node
         return $this;
     }
 
-    public function isDraft(): ?bool
+    public function isDraft(): bool
     {
         return $this->draft;
     }

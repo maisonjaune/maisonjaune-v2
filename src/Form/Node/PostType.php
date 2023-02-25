@@ -2,9 +2,11 @@
 
 namespace App\Form\Node;
 
+use App\Entity\Media\Media;
 use App\Entity\Node\Category;
 use App\Entity\Node\Post;
 use App\Enum\Node\FormPostType;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -57,7 +59,11 @@ class PostType extends AbstractType
 
         if ($options['form_type'] === FormPostType::TYPE_DECORATE) {
             $builder
-                ->add('image');
+                ->add('image', MediaType::class, [
+                    'data_class' => Media::class,
+                    'provider' => 'sonata.media.provider.image',
+                    'context' => 'post',
+                ]);
         }
 
         if ($options['form_type'] === FormPostType::TYPE_PUBLISH) {

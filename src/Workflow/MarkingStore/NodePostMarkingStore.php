@@ -29,6 +29,22 @@ class NodePostMarkingStore implements MarkingStoreInterface
             $marking->mark(PostPlace::WROTE->value);
         }
 
+        if ($subject->isReviewed()) {
+            $marking->mark(PostPlace::REVIEWED->value);
+        }
+
+        if ($subject->isDecorated()) {
+            $marking->mark(PostPlace::DECORATED->value);
+        }
+
+        if ($subject->isReviewed() && $subject->isDecorated()) {
+            $marking->unmark(PostPlace::WROTE->value);
+        }
+
+        if ($subject->isPublished()) {
+            $marking->mark(PostPlace::PUBLISHED->value);
+        }
+
         return $marking;
     }
 
