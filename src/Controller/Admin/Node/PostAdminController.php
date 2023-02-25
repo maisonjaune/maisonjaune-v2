@@ -88,11 +88,14 @@ final class PostAdminController extends CRUDController
             try {
                 if (null !== $request->get('btn_update_and_list')) {
                     $this->postWorkflow->apply($post, PostTransition::WRITE->value);
+                    $this->addFlash('sonata_flash_success', 'post wrote successfully');
                 }
 
                 $this->admin->update($post);
 
-                return $this->redirectTo($request, $post);
+                return null !== $request->get('btn_update_and_list')
+                    ? $this->redirectToList()
+                    : new RedirectResponse($this->admin->generateObjectUrl('edit', $post));
             } catch (LockException $e) {
                 // TODO handle lock exception
             } catch (ModelManagerThrowable $e) {
@@ -121,11 +124,14 @@ final class PostAdminController extends CRUDController
             try {
                 if (null !== $request->get('btn_update_and_list')) {
                     $this->postWorkflow->apply($post, PostTransition::REVIEW->value);
+                    $this->addFlash('sonata_flash_success', 'post reviewed successfully');
                 }
 
                 $this->admin->update($post);
 
-                return $this->redirectTo($request, $post);
+                return null !== $request->get('btn_update_and_list')
+                    ? $this->redirectToList()
+                    : new RedirectResponse($this->admin->generateObjectUrl('review', $post));
             } catch (LockException $e) {
                 // TODO handle lock exception
             } catch (ModelManagerThrowable $e) {
@@ -154,11 +160,14 @@ final class PostAdminController extends CRUDController
             try {
                 if (null !== $request->get('btn_update_and_list')) {
                     $this->postWorkflow->apply($post, PostTransition::DECORATE->value);
+                    $this->addFlash('sonata_flash_success', 'post decorated successfully');
                 }
 
                 $this->admin->update($post);
 
-                return $this->redirectTo($request, $post);
+                return null !== $request->get('btn_update_and_list')
+                    ? $this->redirectToList()
+                    : new RedirectResponse($this->admin->generateObjectUrl('decorate', $post));
             } catch (LockException $e) {
                 // TODO handle lock exception
             } catch (ModelManagerThrowable $e) {
@@ -185,9 +194,9 @@ final class PostAdminController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
-        $this->addFlash('sonata_flash_success', 'Decorated successfully');
+        $this->addFlash('sonata_flash_success', 'Post published successfully');
 
-        return new RedirectResponse($this->admin->generateUrl('list'));
+        return $this->redirectToList();
     }
 
     public function unpublishAction(int $id): ?Response
@@ -202,8 +211,8 @@ final class PostAdminController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
-        $this->addFlash('sonata_flash_success', 'Decorated successfully');
+        $this->addFlash('sonata_flash_success', 'Post unpublished successfully');
 
-        return new RedirectResponse($this->admin->generateUrl('list'));
+        return $this->redirectToList();
     }
 }

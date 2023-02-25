@@ -4,6 +4,8 @@ namespace App\Entity\Node;
 
 use App\Entity\Media\Media;
 use App\Entity\Node;
+use App\Model\Decoratable;
+use App\Model\Reviewable;
 use App\Repository\Node\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\Table(name: "node_post")]
-class Post extends Node
+class Post extends Node implements Reviewable, Decoratable
 {
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank(groups: ['Content'])]
@@ -22,6 +24,12 @@ class Post extends Node
     #[ORM\ManyToOne(cascade: ["persist"])]
     #[Assert\NotBlank(groups: ['Media'])]
     private ?Media $image = null;
+
+    #[ORM\Column]
+    private bool $reviewed = false;
+
+    #[ORM\Column]
+    private bool $decorated = false;
 
     #[ORM\ManyToMany(targetEntity: Category::class)]
     private Collection $categories;
@@ -52,6 +60,30 @@ class Post extends Node
     public function setImage(?Media $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function isReviewed(): ?bool
+    {
+        return $this->reviewed;
+    }
+
+    public function setReviewed(bool $reviewed): self
+    {
+        $this->reviewed = $reviewed;
+
+        return $this;
+    }
+
+    public function isDecorated(): ?bool
+    {
+        return $this->decorated;
+    }
+
+    public function setDecorated(bool $decorated): Decoratable
+    {
+        $this->decorated = $decorated;
 
         return $this;
     }

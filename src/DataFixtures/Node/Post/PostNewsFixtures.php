@@ -39,6 +39,8 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 ->setActif($data['actif'])
                 ->setSticky($data['sticky'])
                 ->setCommentable($data['commentable'])
+                ->setReviewed($data['reviewed'] ?? true)
+                ->setDecorated($data['decorated'] ?? true)
                 ->setPublishedAt($data['publishedAt'] ?? null)
                 ->addCategory($this->getReference('News'))
                 ->setAuthor($this->getReference($data['author']));
@@ -78,6 +80,8 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'reviewed' => true,
+                'decorated' => true,
                 'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-09-02'),
                 'image' => [
                     'name' => 'article-news-01.jpg',
@@ -94,6 +98,8 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'reviewed' => true,
+                'decorated' => true,
                 'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-09-21'),
                 'image' => [
                     'name' => 'article-news-02.jpg',
@@ -110,6 +116,8 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'reviewed' => true,
+                'decorated' => true,
                 'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-10-07'),
                 'image' => [
                     'name' => 'article-news-03.jpg',
@@ -126,7 +134,8 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
-                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-10-29'),
+                'reviewed' => false,
+                'decorated' => false,
                 'image' => [
                     'name' => 'article-news-04.jpg',
                     'path' => '/assets/fixtures/media-04.jpg',
@@ -138,11 +147,12 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'slug' => 'article-news-05',
                 'excerpt' => 'Regnis autem superato celsi Cassii regnis coniunxit funditur praetermeans provincias provincias provincias montis Parthenium Orontes.',
                 'content' => '{"time":0,"blocks":[{"id":"PNFE000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"PNFE000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
-                'draft' => false,
+                'draft' => true,
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
-                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-11-12'),
+                'reviewed' => false,
+                'decorated' => false,
                 'image' => [
                     'name' => 'article-news-05.jpg',
                     'path' => '/assets/fixtures/media-05.jpg',
