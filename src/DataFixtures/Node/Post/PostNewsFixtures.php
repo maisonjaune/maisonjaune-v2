@@ -153,10 +153,6 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'commentable' => true,
                 'reviewed' => false,
                 'decorated' => false,
-                'image' => [
-                    'name' => 'article-news-05.jpg',
-                    'path' => '/assets/fixtures/media-05.jpg',
-                ],
             ],
         ];
     }

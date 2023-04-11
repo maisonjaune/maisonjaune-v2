@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 #[AsCommand(
@@ -54,7 +55,9 @@ class InitCommand extends Command
     private function removeFiles(SymfonyStyle $io, OutputInterface $output)
     {
         if ($this->kernel->getEnvironment() !== 'test') {
-            $folders = [];
+            $folders = [
+                $this->kernel->getProjectDir() . '/public/media',
+            ];
 
             $fileSystem = new Filesystem();
             foreach ($folders as $folder) {

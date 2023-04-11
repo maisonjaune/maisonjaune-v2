@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-    DOCKER_COMPOSE: "docker compose --env-file=.docker/.env"
+    DOCKER_COMPOSE: "docker compose"
     DOCKER_COMPOSE_RUN: "{{.DOCKER_COMPOSE}} run -T --rm --no-deps"
     DOCKER_COMPOSE_EXEC: "{{.DOCKER_COMPOSE}} exec"
     DOCKER_COMPOSE_LOG: "{{.DOCKER_COMPOSE}} logs -f"
@@ -20,74 +20,88 @@ tasks:
 
     docker:build:
         desc: Arrêt des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE}} build"
 
     docker:up:
         desc: Démarrage des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE}} up -d"
 
     docker:ps:
         desc: Visualisation de l'état des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE}} ps"
 
     docker:config:
         desc: Visualisation de la configuration des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE}} config"
 
     docker:exec:
         desc: Exécute une commande dans un container
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE_EXEC}} {{.CLI_ARGS}}"
 
     docker:bash:
         desc: Démarrage des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE_EXEC}} {{.CLI_ARGS}} bash"
 
     docker:node:bash:
         desc: Arrêt des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE_EXEC}} node bash"
 
     docker:node:watch:
         desc: Arrêt des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE_RUN}} node npm run watch"
 
     docker:node:logs:
         desc: Arrêt des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE_LOG}} node"
 
     docker:down:
         desc: Arrêt des containers Docker
+        dir: ./.docker
         cmds:
             - "{{.DOCKER_COMPOSE}} down"
 
     symfony:cache:clear:
         aliases: ["cache:clear"]
         desc: Suppression du cache de votre application
+        dir: ./.docker
         cmds:
             - "{{.SYMFONY_BIN}} cache:clear"
 
     symfony:server:dump:
         aliases: ["server:dump"]
         desc: Démarrage d'un serveur de dumps permettant l'affichage les dumps en un seul endroit
+        dir: ./.docker
         cmds:
             - "{{.SYMFONY_BIN}} server:dump"
 
     symfony:server:log:
         aliases: ["server:log"]
         desc: Démarrage d'un serveur de logs affichant les logs en temps réel
+        dir: ./.docker
         cmds:
             - "{{.SYMFONY_BIN}} server:log"
 
     symfony:make:twig-extension:
         aliases: ["make:twig-extension"]
         desc: Permet de créer une extension Twig
+        dir: ./.docker
         cmds:
             - "{{.SYMFONY_BIN}} make:twig-extension {{.CLI_ARGS}}"
