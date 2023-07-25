@@ -31,3 +31,11 @@ services:
                 manager_type: orm
                 group: Parameters
                 label: Parameter List
+
+    admin.block.server.statistique:
+        class: App\Component\Admin\ServerStatistiqueAdminBlock
+        arguments:
+            - '@twig'
+            - '@App\Service\ServerInformations\ServerInformationsProviderInterface'
+        tags:
+            - { name: sonata.block }

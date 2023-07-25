@@ -1,0 +1,51 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div id="box-server-information" class="box">
+        <div class="box-header">
+            <h3 class="box-title">{{ settings.title | trans }}</h3>
+        </div>
+        <div class="box-body">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td class="sonata-ba-list-label" style="width: 1px; white-space: nowrap">
+                        <i class="fa fa-tasks fa-fw"></i>
+                        {% trans %}Espace Disque{% endtrans %}
+                    </td>
+                    <td class="text-right">
+                        {{ data.disk_available_space }} / {{ data.disk_total_space }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sonata-ba-list-label" style="width: 1px; white-space: nowrap">
+                        <i class="fa fa-tasks fa-fw"></i>
+                        {% trans %}Espace Disque (en %){% endtrans %}
+                    </td>
+                    <td class="text-right">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped {{ data.progressbar_background_color }}"
+                                 role="progressbar"
+                                 style="width: {{ data.percent_available_space }}%;"
+                                 aria-valuenow="{{ data.percent_available_space | round(1) }}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">{{ data.percent_available_space | round(1) }}%</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sonata-ba-list-label" style="width: 1px; white-space: nowrap">
+                        <i class="fa fa-database fa-fw"></i>
+                        {% trans %}Espace base de données{% endtrans %}
+                    </td>
+                    <td class="text-right">
+                        {{ data.database_used_space }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
+{% endblock %}
