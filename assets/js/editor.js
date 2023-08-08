@@ -1,4 +1,5 @@
 import EditorJS from '@editorjs/editorjs'
+import List from '@editorjs/list'
 
 import renderer from "./renderer"
 
@@ -11,6 +12,16 @@ export default function (Alpine) {
             const editor = new EditorJS({
                 holder: 'editor',
                 placeholder: 'Rédigez votre article ici !',
+
+                tools: {
+                    list: {
+                        class: List,
+                        inlineToolbar: true,
+                        config: {
+                            defaultStyle: 'unordered'
+                        }
+                    },
+                },
 
                 onReady() {
                     const content = form.querySelector('[data-input=content]').value
