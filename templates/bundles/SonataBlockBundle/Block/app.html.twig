@@ -1,0 +1,37 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div id="box-server-information" class="box {{ box_class }}">
+        <div class="box-header">
+            <h3 class="box-title">Informations applicatif</h3>
+        </div>
+        <div class="box-body">
+            {% if lifeExpired %}
+                <div class="alert alert-danger">
+                    {% trans %}End of life expired !{% endtrans %}
+                </div>
+            {% elseif maintenanceExpired %}
+                <div class="alert alert-warning">
+                    {% trans %}End of maintenance expired !{% endtrans %}
+                </div>
+            {% endif %}
+
+            <table class="table">
+                <tbody>
+                    {% for key, value in data %}
+                        <tr>
+                            <td class="sonata-ba-list-label">
+                                {{ key | trans }}
+                            </td>
+                            <td class="text-right">
+                                {{ value }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
+{% endblock %}
