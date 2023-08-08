@@ -1,0 +1,29 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="row">
+        {% for d in data %}
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="small-box {{ d.bg }}">
+                    <div class="inner">
+                        <div class="box-header">
+                            <h3 class="box-title">{{ d.titre }}</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="media">
+                                <div class="media-body text-left">
+                                    <div>
+                                        <span style="font-size: 2em">{{ d.count }}</span>
+                                    </div>
+                                </div>
+                                <div class="media-right">
+                                    <i class="fa {{ d.icon }} fa-3x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

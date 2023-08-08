@@ -50,6 +50,14 @@ class NodeRepository extends ServiceEntityRepository
             ->setParameter('today', new DateTime());
     }
 
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('n')
+            ->select('COUNT(n)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     protected function getNodeClass(): string
     {
         return Node::class;

@@ -10,8 +10,8 @@ sonata_admin:
 
     dashboard:
         blocks:
-            - { type: sonata.admin.block.admin_list, position: left }
-            - { type: admin.block.server.statistique, position: right }
+            - { type: admin.block.statistique, position: top, class: col-xs-12 }
+            - { type: admin.block.server-statistique, position: right }
             - { type: admin.block.app, position: right }
 
         groups:
@@ -46,9 +46,9 @@ sonata_admin:
 
 sonata_block:
     blocks:
-        admin.block.server.statistique:
+        admin.block.statistique:
             contexts: [admin]
-        sonata.admin.block.admin_list:
         admin.block.app:
             contexts: [admin]
+        admin.block.server-statistique:
             contexts: [admin]

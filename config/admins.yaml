@@ -32,7 +32,14 @@ services:
                 group: Parameters
                 label: Parameter List
 
-    admin.block.server.statistique:
+    admin.block.statistique:
+        class: App\Component\Admin\StatistiqueAdminBlock
+        arguments:
+            - '@twig'
+            - '@App\Repository\UserRepository'
+            - '@App\Repository\Node\PostRepository'
+        tags: [ sonata.block ]
+
     admin.block.app:
         class: App\Component\Admin\AppAdminBlock
         arguments:
@@ -40,6 +47,8 @@ services:
             - '@App\Service\ServerInformations\ServerInformationsProviderInterface'
         tags:
             - { name: sonata.block }
+
+    admin.block.server-statistique:
         class: App\Component\Admin\ServerStatistiqueAdminBlock
         arguments:
             - '@twig'
