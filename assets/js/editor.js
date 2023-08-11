@@ -1,5 +1,6 @@
 import EditorJS from '@editorjs/editorjs'
 import List from '@editorjs/list'
+import ImageTool from '@editorjs/image'
 
 import renderer from "./renderer"
 
@@ -21,6 +22,15 @@ export default function (Alpine) {
                             defaultStyle: 'unordered'
                         }
                     },
+                    image: {
+                        class: ImageTool,
+                        config: {
+                            endpoints: {
+                                byFile: '/editorjs/plugin/image/upload-by-file',
+                                byUrl: '/editorjs/plugin/image/upload-by-url',
+                            }
+                        }
+                    }
                 },
 
                 onReady() {
