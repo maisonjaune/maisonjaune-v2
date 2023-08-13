@@ -2,6 +2,8 @@ import EditorJS from '@editorjs/editorjs'
 
 import renderer from "./renderer"
 
+import ImageTool from './editorjs/plugins/image/image'
+
 export default function (Alpine) {
     document.addEventListener('alpine:init', () => {
         Alpine.directive('editor', (el, a, b) => {
@@ -12,6 +14,12 @@ export default function (Alpine) {
             const editor = new EditorJS({
                 holder: 'editor',
                 placeholder: 'Rédigez votre article ici !',
+
+                tools: {
+                    image: {
+                        class: ImageTool
+                    },
+                },
 
                 onChange: (api, event) => {
                     editor.saver.save()
