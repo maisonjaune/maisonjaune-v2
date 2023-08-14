@@ -3,16 +3,16 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use FOS\UserBundle\Model\UserManagerInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends AppFixtures
 {
     public function __construct(
         private UserManagerInterface $userManager,
     )
     {
+        parent::__construct();
     }
 
     public function load(ObjectManager $manager): void

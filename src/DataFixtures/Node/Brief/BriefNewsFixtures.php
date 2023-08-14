@@ -2,15 +2,15 @@
 
 namespace App\DataFixtures\Node\Brief;
 
+use App\DataFixtures\AppFixtures;
 use App\DataFixtures\Node\CategoryFixtures;
 use App\DataFixtures\UserFixtures;
 use App\Entity\Node\Brief;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use DateTimeImmutable;
 
-class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
+class BriefNewsFixtures extends AppFixtures implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -44,7 +44,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur01',
                 'title' => 'Brève News 01',
                 'slug' => 'breve-news-01',
-                'content' => '{"time":0,"blocks":[{"id":"BNFA000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFA000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,
@@ -55,7 +68,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur02',
                 'title' => 'Brève News 02',
                 'slug' => 'breve-news-02',
-                'content' => '{"time":0,"blocks":[{"id":"BNFB000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFB000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,
@@ -66,7 +92,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur03',
                 'title' => 'Brève News 03',
                 'slug' => 'breve-news-03',
-                'content' => '{"time":0,"blocks":[{"id":"BNFC000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFC000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,
@@ -77,7 +116,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur01',
                 'title' => 'Brève News 04',
                 'slug' => 'breve-news-04',
-                'content' => '{"time":0,"blocks":[{"id":"BNFD000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFD000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,
@@ -88,7 +140,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur01',
                 'title' => 'Brève News 05',
                 'slug' => 'breve-news-05',
-                'content' => '{"time":0,"blocks":[{"id":"BNFE000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFE000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,
@@ -99,7 +164,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur01',
                 'title' => 'Brève News 06',
                 'slug' => 'breve-news-06',
-                'content' => '{"time":0,"blocks":[{"id":"BNFF000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFF000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,
@@ -110,7 +188,20 @@ class BriefNewsFixtures extends Fixture implements DependentFixtureInterface
                 'author' => 'redacteur01',
                 'title' => 'Brève News 07',
                 'slug' => 'breve-news-07',
-                'content' => '{"time":0,"blocks":[{"id":"BNFG000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"BNFG000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'content' => $this->parseEditorJs([
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."
+                        ]
+                    ],
+                    [
+                        "type" => "paragraph",
+                        "data" => [
+                            "text" => "Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."
+                        ]
+                    ]
+                ]),
                 'draft' => false,
                 'actif' => true,
                 'sticky' => true,

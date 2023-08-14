@@ -2,13 +2,13 @@
 
 namespace App\DataFixtures\Parameter;
 
+use App\DataFixtures\AppFixtures;
 use App\Entity\Parameter;
 use App\FormBuilder\Option\EntityTypeTeamOptionFormBuilder;
 use App\FormBuilder\Option\TextareaTypeOptionFormBuilder;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class DefaultParameterFixtures extends Fixture
+class DefaultParameterFixtures extends AppFixtures
 {
     public function load(ObjectManager $manager)
     {
