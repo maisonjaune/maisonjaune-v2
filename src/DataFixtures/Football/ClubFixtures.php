@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures\Football;
 
+use App\DataFixtures\AppFixtures;
 use App\Entity\Football\Club;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\ImageProvider;
@@ -11,7 +11,7 @@ use Sonata\MediaBundle\Provider\ImageProviderInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ClubFixtures extends Fixture
+class ClubFixtures extends AppFixtures
 {
     public function __construct(
         #[Autowire(service: 'sonata.media.manager.media')] private MediaManagerInterface   $mediaManager,
@@ -19,6 +19,7 @@ class ClubFixtures extends Fixture
         #[Autowire('%kernel.project_dir%')] private string                                 $projectDir,
     )
     {
+        parent::__construct();
     }
 
     public function load(ObjectManager $manager)
