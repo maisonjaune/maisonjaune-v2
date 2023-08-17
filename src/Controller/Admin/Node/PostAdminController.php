@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Workflow\WorkflowInterface;
+use DateTimeImmutable;
 
 final class PostAdminController extends CRUDController
 {
@@ -114,6 +115,10 @@ final class PostAdminController extends CRUDController
     {
         $post = $this->admin->getSubject();
 
+        if (!$post instanceof Post) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
+        }
+
         $form = $this->createForm(PostType::class, $post, [
             'form_type' => FormPostType::TYPE_REVIEW
         ]);
@@ -132,9 +137,7 @@ final class PostAdminController extends CRUDController
                 return null !== $request->get('btn_update_and_list')
                     ? $this->redirectToList()
                     : new RedirectResponse($this->admin->generateObjectUrl('review', $post));
-            } catch (LockException $e) {
-                // TODO handle lock exception
-            } catch (ModelManagerThrowable $e) {
+            } catch (LockException|ModelManagerThrowable $e) {
                 // TODO handle model manager throwable
             }
         }
@@ -149,6 +152,10 @@ final class PostAdminController extends CRUDController
     public function decorateAction(Request $request, int $id): ?Response
     {
         $post = $this->admin->getSubject();
+
+        if (!$post instanceof Post) {
+            throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
+        }
 
         $form = $this->createForm(PostType::class, $post, [
             'form_type' => FormPostType::TYPE_DECORATE
@@ -186,7 +193,7 @@ final class PostAdminController extends CRUDController
     {
         $post = $this->admin->getSubject();
 
-        if (!$post) {
+        if (!$post instanceof Post) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
@@ -194,7 +201,13 @@ final class PostAdminController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
-        $this->addFlash('sonata_flash_success', 'Post published successfully');
+        try {
+            $this->postWorkflow->apply($post, PostTransition::PUBLISH->value);
+            $this->admin->update($post);
+            $this->addFlash('sonata_flash_success', 'Post published successfully');
+        } catch (LockException|ModelManagerThrowable $e) {
+            $this->addFlash('sonata_flash_error', 'Post not published successfully');
+        }
 
         return $this->redirectToList();
     }
@@ -203,7 +216,7 @@ final class PostAdminController extends CRUDController
     {
         $post = $this->admin->getSubject();
 
-        if (!$post) {
+        if (!$post instanceof Post) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
@@ -211,7 +224,13 @@ final class PostAdminController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
-        $this->addFlash('sonata_flash_success', 'Post unpublished successfully');
+        try {
+            $this->postWorkflow->apply($post, PostTransition::UNPUBLISH->value);
+            $this->admin->update($post);
+            $this->addFlash('sonata_flash_success', 'Post unpublished successfully');
+        } catch (LockException|ModelManagerThrowable $e) {
+            $this->addFlash('sonata_flash_error', 'Post not published successfully');
+        }
 
         return $this->redirectToList();
     }

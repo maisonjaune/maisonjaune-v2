@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Model\Draftable;
+use App\Model\Publiable;
 use App\Repository\NodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: NodeRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "node_type", type: "string")]
-abstract class Node implements Draftable
+abstract class Node implements Draftable, Publiable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
