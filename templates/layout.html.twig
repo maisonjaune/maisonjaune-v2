@@ -28,11 +28,15 @@
         {% block ld_json %}{% endblock %}
     </head>
     <body>
+        {% block wrapper_start %}{% endblock %}
+
         {{ block('body') }}
 
-        <script type="text/javascript" src="{{ asset('build/plugin/tarteaucitron/tarteaucitron.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('build/plugin/tarteaucitron/tarteaucitron.services.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('build/plugin/tarteaucitron/lang/tarteaucitron.fr.js') }}"></script>
+        {% block wrapper_end %}{% endblock %}
+
+        {# TODO : load asset build/plugin/tarteaucitron/tarteaucitron.js #}
+        {# TODO : load asset build/plugin/tarteaucitron/tarteaucitron.services.js #}
+        {# TODO : load asset build/plugin/tarteaucitron/lang/tarteaucitron.fr.js #}
 
         <script type="text/javascript">var googleTagManagerKey = "{{ google_tag_manager_code }}"</script>
 

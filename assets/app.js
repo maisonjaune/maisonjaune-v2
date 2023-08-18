@@ -1,12 +1,13 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import './styles/app.scss'
 
-// any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.scss';
+import { Modal } from 'bootstrap'
+import Alpine from 'alpinejs'
 
-// start the Stimulus application
-import './bootstrap';
+import editor from './js/editor'
+
+Alpine.plugin(editor)
+
+Alpine.magic('modal', () => Modal)
+
+window.Alpine = Alpine
+window.Alpine.start()

@@ -1,0 +1,64 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}Admin - Edition - {{ object.title }}{% endblock %}
+
+{% block wrapper_start %}
+    <div x-data x-editor>
+        {{ component('editor-sidebar', {
+            form: form
+        }) }}
+{% endblock %}
+
+{% block content_primary %}
+
+    {{ component('flash') }}
+
+    <div class="mb-3">
+        {% embed "@component/card.html.twig" with { post: object, form: form } only %}
+            {% set card_classes = ['card-post-full'] %}
+            {% set card_footer_classes = ['d-flex flex-row justify-content-between'] %}
+
+            {% block card_content %}
+                {% if post.image is not null %}
+                    {{ sonata_media(post.image, 'show', {
+                        class: 'card-img-top',
+                        alt: post.title
+                    }) }}
+                {% else %}
+                    <img src="https://dummyimage.com/768x432/bdc3c7/7f8c8d&text=Image+à+insérer" alt="Image à la une"/>
+                {% endif %}
+
+                <div class="card-body">
+                    <div class="categories" data-render="categories">{{ post.categories | map(c => c.name) | join(' / ') }}</div>
+                    <h5 class="lead" data-render="title">{{ post.title }}</h5>
+                    <div class="text-muted">
+                        {{ post.author.fullname }} | {{ post.publishedAt | date('d/m/Y') }}
+                    </div>
+                    <hr/>
+                    <div class="font-weight-bold mb-3" data-render="excerpt">
+                        {{ post.excerpt }}
+                    </div>
+
+                    {% if form.content is defined %}
+                        <div id="editor" class="post-content classic"></div>
+                    {% else %}
+                        <div class="post-content classic">
+                            {{ post.content | raw }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+
+{% block content_secondary %}
+    <div class="mb-3">
+        {{ component('card-brief_list') }}
+    </div>
+    {{ component('last_posts.block') }}
+{% endblock %}
+
+{% block wrapper_end %}
+    </div>
+{% endblock %}

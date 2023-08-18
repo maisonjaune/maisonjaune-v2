@@ -1,0 +1,19 @@
+{% if admin.hasAccess('publish', object) and admin.hasRoute('publish') %}
+    {% set button_content = sonata_config.getOption('list_action_button_content') %}
+    <a
+            href="{{ admin.generateObjectUrl('publish', object, actions.link_parameters|default([])) }}"
+            class="btn btn-sm btn-default edit_link"
+            title="{{ 'action_publish'|trans({}, 'SonataAdminBundle') }}"
+    >
+        {% if button_content == 'icon' or button_content == 'all' %}
+            <i class="fas fa-check-square" aria-hidden="true"></i>
+        {% endif %}
+        {% if button_content == 'text' or button_content == 'all' %}
+            {{ 'action_publish'|trans({}, 'SonataAdminBundle') }}
+        {% else %}
+            <span class="sr-only">
+                {{ 'action_publish'|trans({}, 'SonataAdminBundle') }}
+            </span>
+        {% endif %}
+    </a>
+{% endif %}

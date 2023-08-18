@@ -35,9 +35,12 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 ->setSlug($data['slug'])
                 ->setExcerpt($data['excerpt'] ?? null)
                 ->setContent($data['content'])
+                ->setDraft($data['draft'])
                 ->setActif($data['actif'])
                 ->setSticky($data['sticky'])
                 ->setCommentable($data['commentable'])
+                ->setReviewed($data['reviewed'] ?? true)
+                ->setDecorated($data['decorated'] ?? true)
                 ->setPublishedAt($data['publishedAt'] ?? null)
                 ->addCategory($this->getReference('News'))
                 ->setAuthor($this->getReference($data['author']));
@@ -72,10 +75,13 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'Article News 01',
                 'slug' => 'article-news-01',
                 'excerpt' => 'Regnis autem superato celsi Cassii regnis coniunxit funditur praetermeans provincias provincias provincias montis Parthenium Orontes.',
-                'content' => '<p>Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res.</p><p>Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut.</p>',
+                'content' => '{"time":0,"blocks":[{"id":"PNFA000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"PNFA000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'draft' => false,
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'reviewed' => true,
+                'decorated' => true,
                 'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-09-02'),
                 'image' => [
                     'name' => 'article-news-01.jpg',
@@ -87,10 +93,13 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'Article News 02',
                 'slug' => 'article-news-02',
                 'excerpt' => 'Regnis autem superato celsi Cassii regnis coniunxit funditur praetermeans provincias provincias provincias montis Parthenium Orontes.',
-                'content' => '<p>Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res.</p><p>Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut.</p>',
+                'content' => '{"time":0,"blocks":[{"id":"PNFB000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"PNFB000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'draft' => false,
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'reviewed' => true,
+                'decorated' => true,
                 'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-09-21'),
                 'image' => [
                     'name' => 'article-news-02.jpg',
@@ -102,10 +111,13 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'Article News 03',
                 'slug' => 'article-news-03',
                 'excerpt' => 'Regnis autem superato celsi Cassii regnis coniunxit funditur praetermeans provincias provincias provincias montis Parthenium Orontes.',
-                'content' => '<p>Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res.</p><p>Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut.</p>',
+                'content' => '{"time":0,"blocks":[{"id":"PNFC000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"PNFC000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'draft' => false,
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
+                'reviewed' => true,
+                'decorated' => true,
                 'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-10-07'),
                 'image' => [
                     'name' => 'article-news-03.jpg',
@@ -117,11 +129,13 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'Article News 04',
                 'slug' => 'article-news-04',
                 'excerpt' => 'Regnis autem superato celsi Cassii regnis coniunxit funditur praetermeans provincias provincias provincias montis Parthenium Orontes.',
-                'content' => '<p>Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res.</p><p>Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut.</p>',
+                'content' => '{"time":0,"blocks":[{"id":"PNFD000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"PNFD000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'draft' => false,
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
-                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-10-29'),
+                'reviewed' => false,
+                'decorated' => false,
                 'image' => [
                     'name' => 'article-news-04.jpg',
                     'path' => '/assets/fixtures/media-04.jpg',
@@ -132,15 +146,13 @@ class PostNewsFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'Article News 05',
                 'slug' => 'article-news-05',
                 'excerpt' => 'Regnis autem superato celsi Cassii regnis coniunxit funditur praetermeans provincias provincias provincias montis Parthenium Orontes.',
-                'content' => '<p>Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res.</p><p>Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut.</p>',
+                'content' => '{"time":0,"blocks":[{"id":"PNFE000001","type":"paragraph","data":{"text":"Quapropter a natura mihi videtur potius quam ab indigentia orta amicitia, applicatione magis animi cum quodam sensu amandi quam cogitatione quantum illa res."}},{"id":"PNFE000002","type":"paragraph","data":{"text":"Ideo urbs venerabilis post superbas efferatarum gentium cervices oppressas latasque leges fundamenta libertatis et retinacula sempiterna velut."}}],"version":"2.26.5"}',
+                'draft' => true,
                 'actif' => true,
                 'sticky' => true,
                 'commentable' => true,
-                'publishedAt' => DateTimeImmutable::createFromFormat('Y-m-d','2022-11-12'),
-                'image' => [
-                    'name' => 'article-news-05.jpg',
-                    'path' => '/assets/fixtures/media-05.jpg',
-                ],
+                'reviewed' => false,
+                'decorated' => false,
             ],
         ];
     }
