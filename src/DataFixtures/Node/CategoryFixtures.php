@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures\Node;
 
+use App\DataFixtures\AppFixtures;
 use App\Entity\Node\Category;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class CategoryFixtures extends Fixture
+class CategoryFixtures extends AppFixtures
 {
     public function load(ObjectManager $manager)
     {

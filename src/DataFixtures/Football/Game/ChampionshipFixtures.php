@@ -2,12 +2,11 @@
 
 namespace App\DataFixtures\Football\Game;
 
-use App\Entity\Football\Club;
+use App\DataFixtures\AppFixtures;
 use App\Entity\Football\Game\Championship;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class ChampionshipFixtures extends Fixture
+class ChampionshipFixtures extends AppFixtures
 {
     public function load(ObjectManager $manager)
     {

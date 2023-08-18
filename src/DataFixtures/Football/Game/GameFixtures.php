@@ -2,13 +2,12 @@
 
 namespace App\DataFixtures\Football\Game;
 
+use App\DataFixtures\AppFixtures;
 use App\Entity\Football\Game\Game;
-use App\Entity\Football\Game\Season;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class GameFixtures extends Fixture implements DependentFixtureInterface
+class GameFixtures extends AppFixtures implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
